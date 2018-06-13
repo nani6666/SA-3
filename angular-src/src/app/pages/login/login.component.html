@@ -1,0 +1,45 @@
+<div class="login-container">
+    <div class="col-xl-4 col-md-6 col-10 mx-auto">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 class="card-title">Sign in to Azimuth</h2>
+                <a routerLink="/register" class="btn btn-link transition bottom-15">Don't have an account? Sign up now!</a>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class=" text-left">
+                    <div class="form-group">
+                        <input [formControl]="email" class="form-control checking-field" placeholder="Email" type="text">                      
+                        <span class="help-block text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('required')">Email is required</span>                              
+                        <span class="help-block text-danger" *ngIf="form.get('email').touched && form.get('email').hasError('invalidEmail')">Invalid email address</span>
+                    </div>
+                    <div class="form-group">
+                        <input [formControl]="password" class="form-control checking-field" placeholder="Password" type="password">
+                        <span class="help-block text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Password is required</span>                              
+                        <span class="help-block text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Password isn't long enough, minimum of 6 characters</span>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input checkbox-main" id="login-keep">
+                            <label class="custom-control-label" for="login-keep">Keep me signed in</label>
+                        </div>
+                        <a class="btn btn-link forgot transition pull-right" href="javascript:void(0);">Forgot password?</a>                     
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="!form.valid" class="btn btn-main btn-block" type="submit">Sign in</button>
+                    </div>
+                </form>
+              
+                <div class="auth-sep"><span><span>or Sign in with one click</span></span></div>
+
+                <div class="form-group">
+                    <ul class="login-help">
+                        <li><i class="socicon socicon-facebook transition"></i></li>
+                        <li><i class="socicon socicon-twitter transition"></i></li>
+                        <li><i class="socicon socicon-google transition"></i></li>              
+                    </ul>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+

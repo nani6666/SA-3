@@ -1,0 +1,386 @@
+@import "../../../theme/styles/variables";
+
+
+
+
+.disabledLi{
+    opacity: 0.5;
+    pointer-events: none;
+  
+    > * {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+}
+
+
+
+
+
+.dangerError{
+    padding : 15px;
+    border: 1px solid rgba(191, 23, 37, 0.8);
+}
+
+.dangerErrorOnly{
+    border: 1px solid rgba(191, 23, 37, 0.8);
+}
+
+.successError{
+    border-color: rgba(45, 146, 45, 0.8);
+}
+
+.errorField{
+    color : rgba(191, 23, 37, 0.8);
+    font-size: 12px;
+    padding: 5px;
+    letter-spacing: 0.5px;
+}
+
+
+
+.form-control.ng-dirty.ng-touched.ng-invalid{
+    border : 1px solid rgba(191, 23, 37, 0.8) !important;
+}
+
+.form-control.ng-dirty.ng-touched.ng-invalid:focus{
+    box-shadow: 0 0 0 0.1rem rgba(243, 165, 172, 0.8) !important;
+}
+
+
+
+
+
+.step{
+    text-align: center;
+    &:before, &:after{
+        content: '';
+        position: absolute;        
+        background-color: $gray-light;
+        top: 0;
+        margin-top: 23px;        
+        width: 50%;
+        height: 5px;
+        border-top: 1px solid $gray;
+        border-bottom: 1px solid $gray;        
+    }
+    &:before{
+        left: 0;
+    }
+    &:after{
+        right: 0;
+    }
+    &:first-child:before {
+        display: none; 
+    }
+    &.last:after{
+        display: none; 
+    }
+    .step-icon{
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        background: $gray-light;
+        border: 1px solid $gray;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 0 auto;
+        i{
+            margin: 0 auto;
+            font-size: 20px;
+            color: $gray;
+        }
+    }
+    &.active{
+        &:before, &:after{
+            background: $danger-color;
+            border:none;
+        }
+        .step-icon{
+            background: $danger-color;
+            border:none;
+            i{
+                color: $default-color; 
+            }
+        }
+    }
+    &.valid{
+        &:before, &:after{
+            background: $success-color;
+            border:none;
+        }
+        .step-icon{
+            background: $success-color;
+            border:none;
+            i{
+                color: $default-color; 
+            }
+        }
+    }
+    .step-name{
+        display: block;
+        margin-top: 14px;
+        color: $gray;
+        &.active{
+            color: $danger-color;
+        }
+        &.valid{
+            color: $success-color;
+        }
+    }
+}
+
+.form-wizard{  
+    margin-top:25px;
+    margin-bottom: 20px;
+    background: $body-bg-color;
+    padding-top: 15px; 
+    min-height: 400px;   
+    .form-title{
+        margin-bottom: 15px;
+        color: $gray;
+        border-bottom: 1px solid $gray-light;
+        padding: 0 15px;
+    }
+    .form-control-label{
+        color: $text-color !important;
+    }
+    .help-block{
+        position: absolute;
+        font-size: 11px;
+    }
+}
+
+.arrow{
+    font-size: 12px;
+}
+
+
+@media (max-width: 767px) { 
+    .step{
+        margin-bottom: 10px;
+        text-align: left;
+        .step-icon{
+            float: left;
+            margin-right: 15px;
+        }
+        &:before, &:after{
+            content: none;
+        }
+    }  
+}
+
+
+// css
+
+.main1 {
+    max-height: 300px;
+    overflow-y: scroll;
+    width: 100%;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.fa-icon-color-success{
+  color:green;  
+}
+
+.fa-icon-color-danger{
+  color:red;  
+}
+.specborder > div{
+ border: 1px solid grey;
+}
+.help-block-custom{
+    position:unset !important;
+}
+.mb-10{
+  margin-bottom: 10px;
+}
+.paytypeactive{
+  border:1px solid blue;
+}
+
+
+    .panel-group .panel {
+        border-radius: 0;
+        box-shadow: none;
+        border-color: #EEEEEE;
+    }
+
+    .panel-default > .panel-heading {
+        padding: 0;
+        border-radius: 0;
+        color: #212121;
+        background-color: #FAFAFA;
+        border-color: #EEEEEE;
+    }
+
+    .panel-title {
+        font-size: 14px;
+    }
+
+    .panel-title > a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+    }
+
+    .more-less {
+        float: right;
+        color: #212121;
+    }
+
+    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: #EEEEEE;
+    }
+   .trade-accod-custom-color{
+      color: white;
+      text-decoration: none; 
+      }
+   .trade-accod-custom-color:hover{
+      color: white;
+      text-decoration: none; 
+      }
+
+    .chip {
+    margin-right: 10px;
+    margin-top: 8px;
+    display: inline-block;
+    padding: 0 9px;
+    height: 40px;
+    font-size: 18px;
+    line-height: 39px;
+    border-radius: 25px;
+    background-color: #acd7de;
+    }
+
+    .chip img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    }
+
+    .closebtn {
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    }
+
+    .closebtn:hover {
+    color: #000;
+    }
+
+@media screen and (min-width: 800px) {
+ .sevenStepsWidth{
+        flex: 0%;
+    }
+}
+    .sevenStepsWidth{
+    width: 14% !important;
+    max-width: 100%;
+    }
+
+.page-count > span {
+    display: none;
+}
+
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell .datatable-header-cell-label {
+    /* background: green; */
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+    line-height: 24px;
+}
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    background-color: #344154;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.active > .datatable-row-center.datatable-row-group >
+datatable-body-cell.datatable-body-cell.sort-active > .datatable-body-cell-label > a {
+color: #fff !important;
+}
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.active > .datatable-row-center.datatable-row-group >
+datatable-body-cell.datatable-body-cell.sort-active > .datatable-body-cell-label > span {
+color: #fff !important;
+}
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row {
+    padding: 0;
+}
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
+    padding: 0.75rem 0 0.75rem 0.75rem;
+}
+
+.main1 {
+     overflow-y: none !important 
+}
+
+.widget-body{
+        min-height: 380px;
+}
+
+.modal-header{
+    color : white;
+    background : #f79a17;
+}

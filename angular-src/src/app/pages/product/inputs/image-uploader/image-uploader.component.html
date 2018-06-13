@@ -1,0 +1,12 @@
+<input type="file" (change)="fileChange(input)" #input class="img-upload-btn"/>
+<button class="btn btn-main btn-block" type="button">
+     <span *ngIf="!image"><i class="fa fa-upload"></i> Select Image... </span>
+     <span *ngIf="image"><i class="fa fa-refresh"></i> Change Image... </span>
+</button>
+
+<div class="image-wrapper">
+    <i *ngIf="image" class="fa fa-times delete-img" (click)="removeImage()"></i>
+    <img [attr.src]="image" *ngIf="image" width="100%">
+    <img src="assets/img/app/no-image.png" *ngIf="!image" width="100%">
+</div>
+

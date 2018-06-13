@@ -1,0 +1,34 @@
+<div class="chat-container">
+    <ul class="media-list" id="media-list" slim-scroll [slimScrollOptions]="{height: 435}">
+        <li *ngFor="let item of chatList" class="media">
+            <div *ngIf="item.side=='left'" class="media-left">
+                <img class="media-object rounded-circle" src="{{item.image}}" alt="author image">
+            </div>
+            <div class="media-body rounded {{item.side}}">
+                <div class="media-heading">
+                    <h6 class="d-inline text-capitalize" [ngClass]="{'pull-left': item.side=='left', 'pull-right': item.side=='right'}">{{item.author}}</h6>
+                    <span class="d-inline" [ngClass]="{'pull-right': item.side=='left', 'pull-left': item.side=='right'}"><i class="fa fa-clock-o"></i>{{item.date | date:"dd MMMM, yyyy 'at' HH:mm a"}}</span>
+                </div>                
+                <p>{{item.text}}</p>
+            </div>
+             <div *ngIf="item.side=='right'" class="media-right">
+                <img class="media-object rounded-circle" src="{{item.image}}" alt="author image">
+            </div>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="input-group">
+                <input type="text" value="" class="form-control" placeholder="Enter your text..."
+                    (keyup)="addChatItem($event)" [(ngModel)]="newChatText">
+                <div class="input-group-btn">
+                    <button class="btn btn-main" type="button" (click)="addChatItem($event)">
+                        <i class="fa fa-paper-plane send"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>            
+    </div>
+</div>

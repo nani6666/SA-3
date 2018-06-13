@@ -1,0 +1,70 @@
+@import "theme/styles/variables";
+@import "theme/styles/mixins";
+
+@import "../../node_modules/pace/themes/pace-theme-flash";
+@import "../../node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css";
+@import "../../node_modules/dropzone/dist/min/dropzone.min";
+@import "~@swimlane/ngx-datatable/release/themes/bootstrap.css";
+@import "~@swimlane/ngx-datatable/release/assets/icons.css";
+@import "theme/styles/bootstrap-override";
+@import "theme/styles/libs-override";
+@import "theme/styles/base";
+
+.dropdown-menu:before {
+    content: " ";
+    position: absolute;
+    top: -12px;
+    right: 11px;
+    left:unset !important;
+    }
+    .dropdown-menu.show {
+    left: -52px !important;
+}
+.dropdown-toggle.custom-action:after {
+    display: none !important;
+    }
+
+    .chip {
+    margin-right: 10px;
+    margin-top: 8px;
+    display: inline-block;
+    padding: 0 9px;
+    height: 40px;
+    font-size: 18px;
+    line-height: 39px;
+    border-radius: 25px;
+    background-color: #acd7de;
+    }
+
+    .chip img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    }
+    .closebtn {
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    }
+
+    .closebtn:hover {
+    color: #000;
+    }
+    .my-customdropdown{
+        transition: translate3d(-90px, 35px, 0px) !important;
+    }
+
+    body.modal-open {
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 0.4rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}

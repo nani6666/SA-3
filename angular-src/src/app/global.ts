@@ -1,0 +1,1 @@
+export const url: string = 'http://34.245.8.159:8091/i4gorigin.';

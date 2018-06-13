@@ -1,0 +1,13 @@
+<div class="col-8 mx-auto">
+    <input type="file" multiple (change)="fileChange(input)" #input class="m-img-upload-btn"/>
+    <button class="btn btn-success btn-block" type="button">
+        <i class="fa fa-upload"></i> Choose images...
+    </button>
+</div>
+
+<div class="card images-container">
+    <div *ngFor="let image of images; let i=index;" class="m-image-wrapper">
+        <i class="fa fa-times m-delete-img" (click)="removeImage(i)"></i>
+        <img [attr.src]="image"> 
+    </div> 
+</div>

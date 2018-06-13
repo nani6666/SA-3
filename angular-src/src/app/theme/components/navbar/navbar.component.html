@@ -1,0 +1,19 @@
+<nav class="nav az-navbar fixed-top">
+    <a class="navbar-brand" routerLink="/" (click)="closeSubMenus()">
+        <img src="assets/img/logo/az_logo_full.png" alt="" class="d-md-block d-none"> 
+        <img src="assets/img/logo/az_logo.png" alt="" class="d-md-none"> 
+    </a>
+    <div id="lines" class="transition" (click)="toggleMenu()"></div>
+    
+    <!-- <form role="search" class="app-search d-md-block d-none">
+        <input type="text" placeholder="Search..." class="form-control">
+        <a href="javascript:void(0)"><i class="fa fa-search"></i></a>
+    </form> -->
+
+    <ul class="nav right-section">
+        <div class="dropdown float-right user-menu">      
+       <button class="btn btn-info btn-rounded mr-3" type="button" routerLink="/login"><i class="fa fa-sign-out"></i> Log out</button>
+          </div>
+    </ul>
+
+</nav>

@@ -1,0 +1,42 @@
+.m-img-upload-btn{
+    position: absolute;
+    padding: 0;
+    width: calc(100% - 30px);
+    height: 38px;
+    opacity: 0;
+}
+.images-container{
+    width: 100%;
+    top: 15px;
+    border: 2px dashed #ccc;
+    background: rgb(241, 241, 241);
+    min-height: 293px;
+    padding: 10px;
+    display: block;
+    .m-image-wrapper{
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+        width: 120px;
+        height: 120px;
+        .m-delete-img{
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 3px 5px;
+            border-radius: 50%;
+            visibility: hidden;
+            cursor: pointer;
+        }
+        &:hover .m-delete-img{
+            visibility: visible;
+        }
+        img{
+           width: 120px;
+           height: 120px;          
+        }
+    }   
+}
+

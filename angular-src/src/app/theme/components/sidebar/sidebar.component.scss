@@ -1,0 +1,105 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.sidebar{
+    background: $sidebar-bg-color;
+    height: 100%;
+    min-height: 100%;
+    position: fixed;
+    width: $sidebar-width;
+    overflow: hidden;
+    display: block;
+    z-index: 9;
+    margin-top: 60px;
+    .card{
+        border:0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        overflow: visible;
+        a{
+            color: $default-color;
+            border-bottom: 1px solid rgba($main-color,0.7);
+            box-shadow: 0 1px 0 0 rgba($default-color,0.1);
+            cursor: pointer;
+            padding: 11px 0;
+            font-size: 13px;
+            display: inline-block;
+            width: 100%;
+            i{
+                padding: 0 18px;
+            }
+            b{
+                float: right;
+                margin-right: 15px;
+                margin-top: 4px;
+                font-size: 16px;
+                -webkit-transition: -webkit-transform 0.2s linear;
+                -moz-transition: -moz-transform 0.2s linear;
+                -ms-transition: -ms-transform 0.2s linear;
+                -o-transition: -o-transform 0.2s linear;
+                transition: transform 0.2s linear;
+            }
+            &.collapsed b{
+                -webkit-transform: rotate(-180deg);
+                -moz-transform: rotate(-180deg);
+                -ms-transform: rotate(-180deg);
+                -o-transform: rotate(-180deg);
+                transform: rotate(-180deg);
+            }
+            &:hover{
+                color: $default-color;
+                background-color: $main-color !important;
+            }
+            &.active-link{
+                background-color: $sidebar-item-active-bg-color !important;
+            }
+        }
+        @include menu-level-bg-color($main-color);   
+    }
+    .collapsing {
+        -webkit-transition: height .25s ease;
+        -o-transition: height .25s ease;
+        transition: height .25s ease;
+    }
+
+    &.menu-collapsed{
+        width: 50px;
+        .menu-title, b{
+            display: none;
+        }       
+    }
+}
+a[aria-expanded="true"] { 
+    box-shadow: none !important;
+}
+#sidebar-menu{
+    height: 100%;
+    padding-bottom: 60px;
+}
+
+
+
+
+.sidebar-hover-elem{
+  width: 4px;
+  background: $sidebar-item-active-bg-color;
+  position: absolute;
+  top: -150px;
+  left: 0px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  transition-property: top, height;
+  height: 36px;
+  display: block;
+}
+
+
+@media (max-width: 544px) {
+  .sidebar.menu-collapsed {
+    width: 0;
+  } 
+}

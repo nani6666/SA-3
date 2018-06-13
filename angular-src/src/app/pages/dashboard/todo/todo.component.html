@@ -1,0 +1,28 @@
+<div class="task-todo-container">
+    <div class="row header">
+        <div class="col-sm-12">
+            <div class="input-group">
+                <input type="text" value="" class="form-control" placeholder="Task to do..."
+                     (keyup)="addToDoItem($event)" [(ngModel)]="newTodoText"/>
+                <div class="input-group-btn">
+                    <button class="btn btn-main" type="button" (click)="addToDoItem($event)">
+                        <i class="fa fa-plus add-item-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>            
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="todo-list" slim-scroll [slimScrollOptions]="{height: 347}">
+                <li *ngFor="let item of getNotDeleted()" [ngClass]="{checked: item.isChecked, active: item.isActive}"
+                    (mouseenter)="item.isActive=true" (mouseleave)="item.isActive=false">
+                    <input type="checkbox" [(ngModel)]="item.isChecked">
+                    <span class="cut-with-dots">{{ item.text }}</span>
+                    <i class="fa fa-times text-danger" (click)="item.deleted = true"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

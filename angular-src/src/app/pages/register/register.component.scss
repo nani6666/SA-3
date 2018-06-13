@@ -1,0 +1,22 @@
+@import "../../theme/styles/variables";
+
+.register-container{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    .card{
+        padding: 15px;
+        .btn-link{
+            padding: 0;          
+            &:hover{
+                color: $main-color;
+            }
+        }
+        .terms{
+            font-size:13px;
+        }
+       
+    }
+}
