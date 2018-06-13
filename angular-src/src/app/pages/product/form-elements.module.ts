@@ -19,7 +19,7 @@ export const routes = [
   /*{ path: 'inputs', component: InputsComponent, data: { breadcrumb: 'Inputs' } },
   { path: 'layouts', component: LayoutsComponent, data: { breadcrumb: 'Layouts' } },*/
   { path: '', component: ValidationsComponent, data: { breadcrumb: 'Products' } },
-  { path: 'addproduct', component: WizardComponent, data: { breadcrumb: 'Add Product' } }
+  { path: 'addService', component: WizardComponent, data: { breadcrumb: 'Add Service' } }
 ];
 
 @NgModule({

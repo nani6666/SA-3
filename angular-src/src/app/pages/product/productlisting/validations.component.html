@@ -1,49 +1,54 @@
-<h2>My Products</h2>
+<h2>My Services</h2>
 <div class="row">
     <div class="col">
         <div widget class="card">
             <div class="card-header">
-                <span class="text-uppercase"><i class="fa fa-cube" aria-hidden="true"></i> Products</span>
-                <div class="widget-controls">
+                <span class="text-uppercase"><i class="fa fa-cube" aria-hidden="true"></i> Services</span>
+                <div class="widget-controls"> 
                     <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-                    <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-                </div>
+                    <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>              
+                </div>        
             </div>
             <div class="card-body widget-body">             
                 <div class="row">
                     <div class="col-4">
-                      <button type="button" class="btn btn-success" [routerLink]="['/pages/product/addproduct']"><i class="fa fa-plus" aria-hidden="true"></i> New Product</button> 
+                         <button type="button" class="btn btn-success" [routerLink]="['/pages/product/addproduct']"><i class="fa fa-plus" aria-hidden="true"></i> New Service</button> 
                     </div>
                     <div class="col-4">
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fa fa-search"></i></span>
+                        <div class="input-group mb-3">
+                             <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Search..." (keyup)="updateFilter($event)"/>
                         </div>
-                        <input class="form-control" type="text" placeholder="Search..." (keyup)="updateFilter($event)"/>
-                      </div>
                     </div>
                     <div class="col-4">
-                      <button type="button" class="btn btn-primary" (click)="getMyProductsList()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
-                      <div class="btn-group float-right">
-                        <button type="button" class="btn btn-default dropdown-toggle custom-action dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  [ngClass]="enbleButton ? '' : 'disabled'">Actions</button>
-                        <button type="button" class="btn btn-warning dropdown-toggle custom-action dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  [ngClass]="enbleButton ? '' : 'disabled'">
-                          <i class="fa fa-list" aria-hidden="true"></i>
-                        </button>
-                        <div class="dropdown-menu my-customdropdown">
-                          <a class="dropdown-item" href="#" data-toggle="modal"  data-target="#editproduct" (click)="getProductDetail()"><i class="fa fa-cube" aria-hidden="true"></i> Show/Edit Product Detail </a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changesector" (click)="getSectorIndustryDetail()"><i class="fa fa-columns" aria-hidden="true"></i> Change Sector/Industry</a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changesampledetail" (click)="getSampleDetail()"><i class="fa fa-filter" aria-hidden="true"></i> Change Sample Details</a>  
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changespecification" (click)="getProductSpecs()"><i class="fa fa-cube" aria-hidden="true"></i> Change Specifications</a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changemedia1" (click)="getProductMedia()"><i class="fa fa-picture-o" aria-hidden="true"></i> Change Media</a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changetradedet" (click)="getTradeDetails()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Trade Details </a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changeexporttrm" (click)="getPaymentTermsInfo()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Export Payment Terms</a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changeexportway" (click)="getPaymentWaysInfo()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Export Payment Ways </a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changekeyword" (click)="getProductKeywords()"><i class="fa fa-search" aria-hidden="true" ></i> Add/Remove Keywords</a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changefaq" (click)="getProductFaqs()"><i class="fa fa-question" aria-hidden="true"></i> Add/Remove FAQs</a>
-                          <!-- <a class="dropdown-item" href="#"><i class="fa fa-users" aria-hidden="true"></i> Buyers List</a>
-                          <a class="dropdown-item" href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i> Get i4g Verified</a> -->
+                           <button type="button" class="btn btn-primary" (click)="getMyProductsList()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh</button> 
+                        <div class="btn-group float-right">
+                            <button type="button" class="btn btn-default dropdown-toggle custom-action dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  [ngClass]="enbleButton ? '' : 'disabled'">Actions</button>
+                            <button type="button" class="btn btn-warning dropdown-toggle custom-action dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  [ngClass]="enbleButton ? '' : 'disabled'">
+                              <i class="fa fa-list" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu my-customdropdown">
+                              <a class="dropdown-item" href="#" data-toggle="modal"  data-target="#editproduct" (click)="getServiceDetail()"><i class="fa fa-cube" aria-hidden="true"></i> Show/Edit Service Detail </a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changesector" 
+                              (click)="getSectorIndustryDetail()"><i class="fa fa-columns" aria-hidden="true"></i> Change Sector/Industry</a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changesampledetail" (click)="getSampleDetail()"><i class="fa fa-filter" aria-hidden="true"></i> Change Sample Details</a>  
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changespecification" (click)="getProductSpecs()"><i class="fa fa-cube" aria-hidden="true"></i> Change Specifications</a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changemedia1" (click)="getProductMedia()"><i class="fa fa-picture-o" aria-hidden="true"></i> Change Media</a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changetradedet" (click)="getTradeDetails()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Trade Details </a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changeexporttrm" 
+                              (click)="getPaymentTermsInfo()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Export Payment Terms</a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changeexportway" 
+                              (click)="getPaymentWaysInfo()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Export Payment Ways </a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changekeyword" 
+                              (click)="getProductKeywords()"><i class="fa fa-search" aria-hidden="true" ></i> Add/Remove Keywords</a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changefaq" (click)="getProductFaqs()"><i class="fa fa-question" aria-hidden="true"></i> Add/Remove FAQs</a>
+                              <!-- <a class="dropdown-item" href="#"><i class="fa fa-users" aria-hidden="true"></i> Buyers List</a>
+                              <a class="dropdown-item" href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i> Get i4g Verified</a> -->
+                              
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
 
@@ -67,7 +72,7 @@
                         [draggable]="false"
                         [resizeable]="false"
                         [headerCheckboxable]="false"
-                        [checkboxable]="false" name="Product Code" prop='I4GProductCode'>
+                        [checkboxable]="false" name="Service Code" prop='I4GServiceCode'>
                     </ngx-datatable-column>
                     <ngx-datatable-column
                         [width]="160"
@@ -76,7 +81,7 @@
                         [draggable]="false"
                         [resizeable]="false"
                         [headerCheckboxable]="false"
-                        [checkboxable]="false" name="Product Name" prop='ProductName'>
+                        [checkboxable]="false" name="Service Name" prop='ServiceName'>
                     </ngx-datatable-column>
                     <ngx-datatable-column
                         [width]="200"
@@ -85,7 +90,7 @@
                         [draggable]="false"
                         [resizeable]="false"
                         [headerCheckboxable]="false"
-                        [checkboxable]="false" name="Product Sector" prop='ProductSector'>
+                        [checkboxable]="false" name="Service Sector" prop='ServiceSector'>
                     </ngx-datatable-column>
                     <ngx-datatable-column
                         [width]="150"
@@ -104,9 +109,9 @@
                       
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="View" prop="I4GProductCode" [sortable]="false">
+                    <ngx-datatable-column name="View" prop="I4GServiceCode" [sortable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" let-id="value" ngx-datatable-cell-template >
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#Changemedia" class="" (click)="getProductDetailbyid(row.I4GProductCode)">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#Changemedia" class="" (click)="getServiceDetailbyid(row.I4GServiceCode)">
                               <i class="fa fa-info-circle"></i> view
                             </a>
                         </ng-template>
@@ -536,115 +541,100 @@
           <div class="col-sm-12">
             <div class="panel">
                 <div class="panel panel-default text-center">
-                  <b> Images</b>
+                <b> Images</b>
                 </div>
             </div>
-            <div class="col-sm-4 offset-sm-4" [ngClass]="{'dangerError' :  imageUploadForm.get('Image').hasError('required'), 'successError' : !imageUploadForm.get('Image').hasError('required') }">
-              <az-image-uploader [image]="imagename" (valueChange)="imageChange($event)"></az-image-uploader>
+            <div class="col-sm-4 offset-sm-4">
+                <az-image-uploader [image]="imagename" (valueChange)="imageChange($event)"></az-image-uploader>
             </div>
            
             <div class="col-sm-4 offset-sm-4 text-center">    
-              <form [formGroup]="imageUploadForm" (ngSubmit)="uploadProductImage()">
-                <div class="form-group" [ngClass]="{'has-danger' :  imageUploadForm.get('Name').hasError('required'), 'has-success' : !imageUploadForm.get('Name').hasError('required') }" *ngIf="!imageUploadForm.get('Image').hasError('required')">
+               <form [formGroup]="imageUploadForm" (ngSubmit)="uploadProductImage()">
+                  <div class="form-group" *ngIf="!imageUploadForm.get('Image').hasError('required')">
                   <input type="text" formControlName="Name" class="form-control" id="image1" aria-describedby="ImageName" placeholder="Name">
-                </div>
-                <button type="submit" [disabled]="!imageUploadForm.valid" class="btn btn-success btn-sm mt-2">Add</button>
-              </form>
+                  </div>
+                  <button type="submit" [disabled]="!imageUploadForm.valid" class="btn btn-success btn-sm mt-2">Add</button>
+               </form>
             </div>
-            
-            <hr>
-            <div class="card" *ngIf="saveMediaUrl && saveMediaUrl && saveMediaUrl.ProductMedia && saveMediaUrl.ProductMedia.ImageUrls && saveMediaUrl.ProductMedia.ImageUrls.Image.length > 0">
-              <div class="card-header">Image list</div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class="thead-default">
-                      <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of saveMediaUrl.ProductMedia.ImageUrls.Image; let i = index; ">
-                        <th scope="row">{{i+1}}</th>
-                        <td>{{item.Name}}</td>
-                        <td *ngIf = "saveMediaUrl.ProductMedia.ImageUrls.Image.length > 1">
-                          <i class="fa fa-window-close-o fa-2x fa-icon-color-danger" (click)="removeImageUrlToList(i)"></i>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <hr>
+              <hr>
+                  <div class="card" *ngIf="saveMediaUrl && saveMediaUrl && saveMediaUrl.ProductMedia && saveMediaUrl.ProductMedia.ImageUrls && saveMediaUrl.ProductMedia.ImageUrls.Image.length > 0">
+                  <div class="card-header">Image list</div>
+                  <div class="card-body">
+                  <div class="table-responsive">
 
-          <div class="col-sm-12">
-            <div class="panel mb-2">
-              <div class="panel panel-default text-center"> <b> Videos </b></div>
-            </div>
-            <div>
-              <form [formGroup]="videoUrlsForm" (ngSubmit)="updateMediaUrls()">
-                <table class="table table-bordered table-sm">
-                  <tbody>
-                    <tr formArrayName="VideoUrls" *ngFor="let item of videoUrlsForm.get('VideoUrls')['controls']; let i = index; ">
-                      <ng-container [formGroupName]="i">
-                        <td [ngClass]="{'has-danger' :  item.hasError('required', 'Name'), 'has-success' : !item.hasError('required', 'Name') }">
-                          <input formControlName="Name" class="form-control" placeholder="Name">
-                          <div class="errorField" *ngIf = "item.hasError('required', 'Name')">Video Name Required</div>
-                        </td>
-                        <td [ngClass]="{'has-danger' :  item.hasError('required', 'Url'), 'has-success' : !item.hasError('required', 'Url') }">
-                          <input formControlName="Url" class="form-control" placeholder="Url">
-                          <div class="errorField" *ngIf = "item.hasError('required', 'Url')">Video URL Required</div>
-                        </td>
-                        <td>
-                          <i *ngIf="videoUrlsForm.controls.VideoUrls.controls.length > 1" class="fa fa-window-close-o fa-2x fa-icon-color-danger" aria-hidden="true" (click)="removeVideoUrl(i)"></i>
-                        </td>
-                      </ng-container>
-                    </tr>
-                  </tbody>
-                </table>
-                
-                <div class="text-center">
-                  <!--  <button type="button" class="btn btn-info btn-sm" (click)="addVideoUrl()"> + Add </button> -->
-                  <button type="submit" [disabled]="!videoUrlsForm.valid" class="btn btn-success btn-sm">Add</button>
-                </div>
-              </form>
-            </div>
-            
-            <hr>
-            
-            <div class="card" *ngIf="saveMediaUrl && saveMediaUrl && saveMediaUrl.ProductMedia && saveMediaUrl.ProductMedia.VideoUrls && saveMediaUrl.ProductMedia.VideoUrls.Video.length > 0">
-              <div class="card-header">Video list</div>
-              <div class="card-body">
-                <div class="table-responsive">
                   <table class="table">
-                    <thead class="thead-default">
-                      <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Url</th>
-                        <th>Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of saveMediaUrl.ProductMedia.VideoUrls.Video; let i = index; ">
-                        <th scope="row">{{i+1}}</th>
-                        <td>{{item.Name}}</td>
-                        <td>{{item.Url}}</td>
-                        <td *ngIf = "saveMediaUrl.ProductMedia.VideoUrls.Video.length > 1">
-                          <i class="fa fa-window-close-o fa-2x fa-icon-color-danger" (click)="removeVideoUrlToList(i)"></i>
-                        </td>
-                      </tr>
-                    </tbody>
+                  <thead class="thead-default">
+                  <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of saveMediaUrl.ProductMedia.ImageUrls.Image; let i = index; ">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item.Name}}</td>
+                  <td><i class="fa fa-window-close-o fa-2x fa-icon-color-danger" (click)="removeImageUrlToList(i)"></i></td>
+                  </tr>
+                  </tbody>
                   </table>
-                </div>
-              </div>
-            </div>
+                  </div>
+                  </div>
+                  </div>
           </div>
+           <hr>
+          <div class="col-sm-12">
+              <div class="panel mb-2">
+                <div class="panel panel-default text-center"> <b> Videos </b></div>
+              </div>
+              <div>
+                  <form [formGroup]="videoUrlsForm" (ngSubmit)="updateMediaUrls()">
+                    <table class="table table-bordered table-sm">
+                      <tbody>
+                        <tr formArrayName="VideoUrls"
+                          *ngFor="let item of videoUrlsForm.get('VideoUrls')['controls']; let i = index; ">
+                          <ng-container [formGroupName]="i">
+                            <td><input formControlName="Name" class="form-control" placeholder="Name"></td>
+                            <td><input formControlName="Url" class="form-control" placeholder="Url"></td>
+                            <td>
+                            <i *ngIf="videoUrlsForm.controls.VideoUrls.controls.length > 1" class="fa fa-window-close-o fa-2x fa-icon-color-danger" aria-hidden="true" (click)="removeVideoUrl(i)"></i></td>
+                          </ng-container>
+                        </tr>
+                      </tbody>
+                    </table> 
+                    <div class="text-center">
+                       <!--  <button type="button" class="btn btn-info btn-sm" (click)="addVideoUrl()"> + Add </button> -->
+                        <button type="submit" [disabled]="!videoUrlsForm.valid" class="btn btn-success btn-sm">Add</button>
+                    </div>
+                  </form>
+              </div>
+               <hr>
+              <div class="card" *ngIf="saveMediaUrl && saveMediaUrl && saveMediaUrl.ProductMedia && saveMediaUrl.ProductMedia.VideoUrls && saveMediaUrl.ProductMedia.VideoUrls.Video.length > 0">
+                  <div class="card-header">Video list</div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                  <table class="table">
+                  <thead class="thead-default">
+                  <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Url</th>
+                  <th>Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of saveMediaUrl.ProductMedia.VideoUrls.Video; let i = index; ">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item.Name}}</td>
+                  <td>{{item.Url}}</td>
+                  <td><i class="fa fa-window-close-o fa-2x fa-icon-color-danger" (click)="removeVideoUrlToList(i)"></i></td>
+                  </tr>
+                  </tbody>
+                  </table>
+                  </div>
+                  </div>
+                  </div>
+            </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -664,32 +654,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#Incoterm" (click)="selectedIncoterm()"> Add Incoterm cost details</button>
-          <table class="table table-bordered table-sm mt-3" *ngIf="incoTerms">
-            <thead>
-              <tr>
-                <th scope="col">Incoterm</th>
-                <th scope="col">Action</th>
-                <!-- <th scope="col"></th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let incoTerm of incoTerms;">
-                <td>
-                  {{incoTerm.TermName}}
-                </td>
-                <td>
-                  <i style="cursor: pointer;" class="fa fa-pencil-square-o" aria-hidden="true" (click)="updateTradeDetailForm(incoTerm.TermName)"></i>
-                  <i *ngIf="incoTerms.length > 1" class="fa fa-times fa-icon-color-danger" style="    cursor: pointer;" aria-hidden="true"
-                    (click)="deleteTradeDetailForm(incoTerm)"></i>
-                </td>
-                <!-- <td>
-                      <input class="form-control" [disabled]="true" placeholder="Other">
-                    </td> -->
-              </tr>
-            </tbody>
-          </table>
-        <!-- <hr>
+        
         <h5>Payment Terms</h5>
         <div class="col-sm-12">
           <button class="btn btn-sm mt-1" [ngClass]="this.tradeDetailOption.PaymentTerms.Selected.indexOf('LC') > -1 ? 'btn-info' : 'btn-default'" (click)="selectPaymentTerms('LC')">LC</button>
@@ -712,9 +677,9 @@
           <button class="btn btn-sm mt-1" [ngClass]="this.tradeDetailOption.IncoTerms.Selected.indexOf('DAT') > -1 ? 'btn-info' : 'btn-default'" (click)="selectIncoTerms('DAT')">DAT</button>
           <button class="btn btn-sm mt-1" [ngClass]="this.tradeDetailOption.IncoTerms.Selected.indexOf('DAP') > -1 ? 'btn-info' : 'btn-default'" (click)="selectIncoTerms('DAP')">DAP</button>
           <button class="btn btn-sm mt-1" [ngClass]="this.tradeDetailOption.IncoTerms.Selected.indexOf('DDP') > -1 ? 'btn-info' : 'btn-default'" (click)="selectIncoTerms('DDP')">DDP</button>
-        </div> -->
-      <!-- <hr> -->
-        <!-- <h5 class="mt-2">Payment Ways</h5>
+        </div>
+      <hr>
+        <h5 class="mt-2">Payment Ways</h5>
         <div class="col-sm-12">
                 <div class="row">
                 <div class="col-sm-6 mb-10">
@@ -746,7 +711,7 @@
                     </div>     
                 </div>
             </div>
-        </div> -->
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -849,7 +814,6 @@
           <div class="col-sm-9" style="padding-right: 0;">
               <div class="form-group">
                   <input [(ngModel)]="tag" type="text" class="form-control" placeholder="Keyword" (keyup.enter)="addTag()" />
-                  <div class="help-block help-block-custom text-danger" *ngIf="ProductKeywordsForm.get('Word').hasError('required') || tagErr">Keywords is required</div>
                   <div class="chip" *ngFor="let tag of tags; index as i">
                     {{tag}}
                     <span class="closebtn" (click)="removeTag(i)">&times;</span>
@@ -865,7 +829,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" (click)="closemodal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <button (click)="saveProductKeywords()" type="submit" class="btn btn-primary">Save changes</button>
+         <button (click)="saveProductKeywords()" type="submit" class="btn btn-primary" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -930,7 +894,7 @@
                   <th scope="row">{{i+1}}</th>
                   <td>{{item.Question | slice:0:20}}</td>
                   <td>{{item.Answer | slice:0:20}}</td>
-                  <td><i class="fa fa-window-close-o fa-2x fa-icon-color-danger" (click)="removeProdctFaqsToList(item, item.Faqid, i)"></i></td>
+                  <td><i class="fa fa-window-close-o fa-2x fa-icon-color-danger" (click)="removeProdctFaqsToList(i)"></i></td>
                   </tr>
                   </tbody>
                   </table>
@@ -946,106 +910,4 @@
 
       </div>
    </div>
-</div>
-
-
-<div class="modal fade bd-example-modal-lg" id="Incoterm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <form [formGroup]="tradeDetailForm" (ngSubmit)="saveIncoTermCostDetailAdd()">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle"> Incoterm </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-3">
-              <ul class="list-group" [ngClass] = "editBtn ? 'disabledLi' : '' ">
-                <li class="list-group-item" *ngFor="let t of masterIncoTerms" (click)="selectIncoTermInTrade(t)" [ngClass]="this.tradeDetailForm.get('TermName').value == t ? 'active' : ''">{{t}}</li>
-              </ul>
-            </div>
-            <div class="col-sm-9">
-              <h6>Cost Info</h6>
-              <table class="table table-bordered table-sm">
-                <thead>
-                  <tr>
-                    <th>Cost</th>
-                    <th>Quantity</th>
-                    <th>Unit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr formArrayName="CostDetail" *ngFor="let item of tradeDetailForm.get('CostDetail')['controls']; let i = index; ">
-                    <ng-container [formGroupName]="i">
-                      <td>
-                        <!-- [ngClass]="{'has-danger' :  item.hasError('required', 'Cost') || item.hasError('pattern', 'Cost'), 'has-success' : !item.hasError('required', 'Url') || !item.hasError('pattern', 'Url') }"> -->
-                        <input type="text" formControlName="Cost" class="form-control" placeholder="Cost">
-                      </td>
-                      <td>
-                        <!-- [ngClass]="{'has-danger' :  item.hasError('required', 'Quantity') || item.hasError('pattern', 'Quantity'), 'has-success' : !item.hasError('required', 'Quantity') || !item.hasError('pattern', 'Quantity') }"> -->
-                        <input type="text" formControlName="Quantity" class="form-control" placeholder="Quantity">
-                      </td>
-                      <td>
-                        <!-- [ngClass]="{'has-danger' :  item.hasError('required', 'Unit') || item.hasError('pattern', 'Unit'), 'has-success' : !item.hasError('required', 'Unit') || !item.hasError('pattern', 'Unit') }"> -->
-                        <select formControlName="Unit" class="form-control" placeholder="Unit">
-                          <option *ngFor="let item of UnitS" value="{{item.UnitSid}}">{{item.UnitName}}</option>
-                        </select>
-                      </td>
-                      <!-- <td><input formControlName="CostDetail" class="form-control" placeholder="Value"></td> -->
-                      <td *ngIf = "tradeDetailForm.get('CostDetail')['controls'].length > 1">
-                        <i class="fa fa-window-close-o fa-2x fa-icon-color-danger" aria-hidden="true" (click)="removeItemCostTrade(i)"></i>
-                      </td>
-                    </ng-container>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="text-center">
-                <i aria-hidden="true" class="fa fa-plus-square-o fa-2x fa-icon-color-success" (click)="addItemCostTrade(i)"></i>
-              </div>
-              <h6>Negotiable Price</h6>
-              <table class="table table-bordered table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Unit</th>
-                    <!-- <th scope="col"></th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <!-- [ngClass]="{'has-danger' :  tradeDetailForm.hasError('required', 'NegotiableQuantity') || tradeDetailForm.hasError('pattern', 'NegotiableQuantity'), 'has-success' : !tradeDetailForm.hasError('required', 'NegotiableQuantity') || !tradeDetailForm.hasError('pattern', 'NegotiableQuantity') }"> -->
-                      <input type="number" formControlName="NegotiableQuantity" class="form-control" placeholder="Negotiable Quantity">
-                    </td>
-                    <td>
-                      <!-- [ngClass]="{'has-danger' :  tradeDetailForm.hasError('required', 'NegotiableUnits') || tradeDetailForm.hasError('pattern', 'NegotiableUnits'), 'has-success' : !tradeDetailForm.hasError('required', 'NegotiableUnits') || !tradeDetailForm.hasError('pattern', 'NegotiableUnits') }"> -->
-                      <select formControlName="NegotiableUnits" class="form-control" placeholder="Negotiable Units">
-                        <option *ngFor="let item of UnitS" value="{{item.UnitSid}}">{{item.UnitName}}</option>
-                      </select>
-                    </td>
-                    <!-- <td>
-                                    <input class="form-control" [disabled]="true" placeholder="Other">
-                                    </td> -->
-                  </tr>
-                </tbody>
-              </table>
-              <h6>Terms</h6>
-              <textarea rows="4" style="width:100%" formControlName="Terms" placeholder="Terms"></textarea>
-              <!--  [ngClass]="{'dangerErrorOnly' :  tradeDetailForm.hasError('required', 'Terms') || tradeDetailForm.hasError('pattern', 'Terms'), 'has-success' : !tradeDetailForm.hasError('required', 'Terms') || !tradeDetailForm.hasError('pattern', 'Terms') }" -->
-              <h6> Upload Document </h6>
-              <az-file-uploader [file]="file1" (valueChange)="fileChange($event)"></az-file-uploader>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"  (click)="closemodal()">Close</button>
-          <button type="submit" class="btn btn-success" *ngIf="!editBtn" [disabled]="!tradeDetailForm.valid">Save</button>
-          <button type="submit" class="btn btn-success" *ngIf="editBtn" [disabled]="!tradeDetailForm.valid">Update</button>
-        </div>
-      </form>
-    </div>
-  </div>
 </div>

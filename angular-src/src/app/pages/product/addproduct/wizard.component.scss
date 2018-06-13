@@ -1,21 +1,6 @@
 @import "../../../theme/styles/variables";
 
 
-
-
-.disabledLi{
-    opacity: 0.5;
-    pointer-events: none;
-  
-    > * {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-}
-
-
-
-
 .form-control.ng-dirty.ng-touched.ng-invalid{
     border : 1px solid rgba(191, 23, 37, 0.8) !important;
 }
@@ -355,5 +340,5 @@ input:checked + .slider:before {
 }
 
 .panel-error{
-    border: 2px solid red !important; 
+    border: 2px solid red;
 }

@@ -1,56 +1,5 @@
 @import "../../../theme/styles/variables";
 
-
-
-
-.disabledLi{
-    opacity: 0.5;
-    pointer-events: none;
-  
-    > * {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-}
-
-
-
-
-
-.dangerError{
-    padding : 15px;
-    border: 1px solid rgba(191, 23, 37, 0.8);
-}
-
-.dangerErrorOnly{
-    border: 1px solid rgba(191, 23, 37, 0.8);
-}
-
-.successError{
-    border-color: rgba(45, 146, 45, 0.8);
-}
-
-.errorField{
-    color : rgba(191, 23, 37, 0.8);
-    font-size: 12px;
-    padding: 5px;
-    letter-spacing: 0.5px;
-}
-
-
-
-.form-control.ng-dirty.ng-touched.ng-invalid{
-    border : 1px solid rgba(191, 23, 37, 0.8) !important;
-}
-
-.form-control.ng-dirty.ng-touched.ng-invalid:focus{
-    box-shadow: 0 0 0 0.1rem rgba(243, 165, 172, 0.8) !important;
-}
-
-
-
-
-
 .step{
     text-align: center;
     &:before, &:after{

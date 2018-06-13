@@ -132,7 +132,7 @@
                         </td>
                         <td>
                            <div class="form-group" [ngClass]="{'has-danger' :  item.hasError('required', 'Value') || item.hasError('pattern', 'Value'), 'has-success' : !item.hasError('required', 'Value') || !item.hasError('patten', 'Value') }"><input formControlName="Value" [ngClass]="{'form-control-danger' :  item.hasError('required', 'Value') || item.hasError('pattern', 'Value'), 'form-control-success' :  !item.hasError('required', 'Value') || !item.hasError('pattern', 'Value') }" class="form-control" placeholder="Value"></div></td>
-                        <td *ngIf= "productForm.get('items').length > 1">
+                        <td>
                            <i class="fa fa-window-close-o fa-2x fa-icon-color-danger" aria-hidden="true" (click)="removeItem(i)"></i>
                         </td>
                      </ng-container>
@@ -154,10 +154,10 @@
                </div>
                <div class="col-sm-6 offset-sm-3 text-center">
                   <form [formGroup]="imageUploadForm" (ngSubmit)="uploadProductImage()">
-                        <div class="form-group" [ngClass]="{'has-danger' :  imageUploadForm.get('Name').hasError('required'), 'has-success' : !imageUploadForm.get('Name').hasError('required') }" *ngIf="!imageUploadForm.get('Image').hasError('required')">
-                              <input type="text" formControlName="Name" class="form-control" id="image1" aria-describedby="ImageName" placeholder="Name">
-                        </div>
-                        <button type="submit" [disabled]="!imageUploadForm.valid" class="btn btn-success btn-sm">Upload</button>
+                     <div class="form-group" [ngClass]="{'has-danger' :  imageUploadForm.get('Name').hasError('required'), 'has-success' : !imageUploadForm.get('Name').hasError('required') }" *ngIf="!imageUploadForm.get('Image').hasError('required')">
+                        <input type="text" formControlName="Name" class="form-control" id="image1" aria-describedby="ImageName" placeholder="Name">
+                  </div>
+                  <button type="submit" [disabled]="!imageUploadForm.valid" class="btn btn-success btn-sm">Upload</button>
                   </form> 
                   <!-- 
                      <form [formGroup]="imageUploadForm" (ngSubmit)="uploadProductImage()" >
@@ -327,8 +327,7 @@
    <div class="col-sm-6" style="padding-right: 0;">
       <div class="form-group">
          <input [(ngModel)]="tag" type="text" class="form-control" placeholder="Keyword" (keyup.enter)="addTag()" />
-         <!-- <span class="help-block help-block-custom text-danger" *ngIf="noKeyword">Keywords is required</span>step.hasError &&  --> 
-         <div class="help-block help-block-custom text-danger" *ngIf="ProductKeywordsForm.get('Word').hasError('required') || tagErr">Keywords is required</div> 
+         <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && ProductKeywordsForm.get('Word').hasError('required')">Key Words is required</span> 
          <div class="chip" *ngFor="let tag of tags; index as i">
             {{tag}}
             <span class="closebtn" (click)="removeTag(i)">&times;</span>
@@ -344,8 +343,8 @@
 <!-- step.name=='Trade Detail' -->
 <div *ngIf="step.name=='Trade Detail'">
    <div id="accordion">
-      <div class="card " >
-         <div class="card-header" [ngClass]="penelError1? 'panel-error': ''" id="headingOne">
+      <div class="card "  [ngClass]="penelError1? 'panel-error': ''">
+         <div class="card-header" id="headingOne">
             <h5 class="mb-0">
                <div id="collapse1" class="btn btn-link trade-accod-custom-color" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%; text-align: left;">
                   <i class="fa fa-university" aria-hidden="true"></i> &nbsp;We can export product under following INCOTERMS
@@ -358,25 +357,25 @@
             <div class="card-body">
                <div class="row">
                   <div class="col-sm-6">
-                        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#Incoterm" (click)="selectedIncoterm()"> Add Incoterm cost details</button>
+                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#Incoterm" (click)="selectedIncoterm()"> Add Incoterm cost details</button>
                   </div>
                   <div class="col-sm-6">
-                     <table class="table table-bordered table-sm" *ngIf="incoTerms">
+                     <table class="table table-bordered table-sm" *ngIf="incoTerm">
                         <thead>
                            <tr>
-                              <th scope="col">Incoterm</th>
+                              <th scope="col">IncoTerm</th>
                               <th scope="col">Action</th>
                               <!-- <th scope="col"></th> -->
                            </tr>
                         </thead>
                         <tbody>
-                           <tr *ngFor="let incoTerm of incoTerms;" >
+                           <tr>
                               <td>
                                  {{incoTerm.TermName}}
                               </td>
                               <td>
-                                 <i style="cursor: pointer;" class="fa fa-pencil-square-o" aria-hidden="true" (click)="updateTradeDetailForm(incoTerm.TermName)"></i>
-                                 <i *ngIf = "incoTerms.length > 1" class="fa fa-times fa-icon-color-danger" style="    cursor: pointer;" aria-hidden="true" (click)="deleteTradeDetailForm(incoTerm)"></i>
+                                 <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="updateTradeDetailForm()"></i>
+                                 <i class="fa fa-times fa-icon-color-danger" aria-hidden="true" ></i>
                               </td>
                               <!-- <td>
                                  <input class="form-control" [disabled]="true" placeholder="Other">
@@ -389,8 +388,8 @@
             </div>
          </div>
       </div>
-      <div class="card" >
-         <div class="card-header" [ngClass]="penelError2? 'panel-error': ''" id="headingTwo">
+      <div class="card" [ngClass]="penelError2? 'panel-error': ''">
+         <div class="card-header" id="headingTwo">
             <h5 class="mb-0">
                <div id="collapse1" class="btn btn-link trade-accod-custom-color" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; text-align: left;">
                   <i class="fa fa-file-text" aria-hidden="true"></i> &nbsp;Product export Payment Terms
@@ -411,8 +410,8 @@
             </div>
          </div>
       </div>
-      <div class="card" >
-         <div class="card-header" [ngClass]="penelError3? 'panel-error': ''" id="headingThree">
+      <div class="card" [ngClass]="penelError3? 'panel-error': ''">
+         <div class="card-header" id="headingThree">
             <h5 class="mb-0">
                <div id="collapse1" class="btn btn-link trade-accod-custom-color" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; text-align: left;">
                   <i class="fa fa-money" aria-hidden="false"></i> &nbsp;Product export Payment Ways
@@ -640,7 +639,7 @@
          <div class="modal-body">
             <div class="row">
                <div class="col-sm-3">
-                  <ul class="list-group" [ngClass] = "editBtn ? 'disabledLi' : '' ">
+                  <ul class="list-group">
                      <li class="list-group-item" *ngFor="let t of masterIncoTerms" (click)="selectIncoTermInTrade(t)" [ngClass]="this.tradeDetailForm.get('TermName').value == t ? 'active' : ''">{{t}}</li>
                   </ul>
                </div>
@@ -655,7 +654,8 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr formArrayName="CostDetail" *ngFor = "let item of tradeDetailForm.get('CostDetail')['controls']; let i = index; ">
+                        <tr formArrayName="CostDetail"
+                           *ngFor="let item of tradeDetailForm.get('CostDetail')['controls']; let i = index; ">
                            <ng-container [formGroupName]="i">
                               <td> <!-- [ngClass]="{'has-danger' :  item.hasError('required', 'Cost') || item.hasError('pattern', 'Cost'), 'has-success' : !item.hasError('required', 'Url') || !item.hasError('pattern', 'Url') }"> --><input type="text" formControlName="Cost" class="form-control" placeholder="Cost"></td>
                               <td> <!-- [ngClass]="{'has-danger' :  item.hasError('required', 'Quantity') || item.hasError('pattern', 'Quantity'), 'has-success' : !item.hasError('required', 'Quantity') || !item.hasError('pattern', 'Quantity') }"> -->
@@ -667,7 +667,7 @@
                                  </select>
                               </td>
                               <!-- <td><input formControlName="CostDetail" class="form-control" placeholder="Value"></td> -->
-                              <td *ngIf = "tradeDetailForm.get('CostDetail')['controls'].length > 1">
+                              <td>
                                  <i class="fa fa-window-close-o fa-2x fa-icon-color-danger" aria-hidden="true" (click)="removeItemCostTrade(i)"></i>
                               </td>
                            </ng-container>
@@ -711,9 +711,8 @@
             </div>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModel()">Close</button>
-            <button type="submit" class="btn btn-success" *ngIf="!editBtn" [disabled]="!tradeDetailForm.valid">Save</button>
-            <button type="submit" class="btn btn-success" *ngIf="editBtn" [disabled]="!tradeDetailForm.valid">Update</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success" [disabled]="!tradeDetailForm.valid">Save</button>
          </div>
          </form>
       </div>

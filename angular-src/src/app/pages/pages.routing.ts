@@ -10,9 +10,9 @@ export const routes: Routes = [
         path: '', 
         component: PagesComponent,
         children:[
-            { path:'', redirectTo:'product', pathMatch:'full' },
+            { path:'', redirectTo:'service', pathMatch:'full' },
             //{ path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule', data: { breadcrumb: 'Dashboard' }  },
-            { path: 'product', loadChildren: 'app/pages/product/form-elements.module#FormElementsModule', data: { breadcrumb: 'Listing' } },
+            { path: 'service', loadChildren: 'app/pages/product/form-elements.module#FormElementsModule', data: { breadcrumb: 'Listing' } },
            /* { path: 'maps', loadChildren: 'app/pages/maps/maps.module#MapsModule', data: { breadcrumb: 'Maps' } },
             { path: 'charts', loadChildren: 'app/pages/charting/charting.module#ChartingModule', data: { breadcrumb: 'Charts' } },
             { path: 'ui', loadChildren: 'app/pages/ui/ui.module#UiModule', data: { breadcrumb: 'UI' } },

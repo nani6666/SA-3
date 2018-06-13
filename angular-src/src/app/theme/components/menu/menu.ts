@@ -21,14 +21,14 @@ export const menuItems = [
       },*/
       
       {
-        title: 'My Products',
+        title: 'My Services',
          icon: 'fa-product-hunt',
-        routerLink: 'product',
+        routerLink: 'service',
       },
       {
-        title: 'Add Product',
+        title: 'Add Service',
         icon: 'fa-plus',
-        routerLink: 'product/addproduct'
+        routerLink: 'service/addService'
       }
     ]
   },  
