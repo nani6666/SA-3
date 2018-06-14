@@ -56,7 +56,7 @@ export class ValidationApiService {
 
     getSampleDetail(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/getSampleDetail', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/getFeatureDetail', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 
@@ -66,9 +66,9 @@ export class ValidationApiService {
     .map(res => res.json());
     }
 
-    getProductMedia(data){
+    getServiceMedia(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/getProductMedia', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/getServiceMedia', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 
@@ -90,15 +90,15 @@ export class ValidationApiService {
     .map(res => res.json());
     }
 
-    getProductKeywords(data){
+    getServiceKeywords(data){
     this.loadToken();
     return this.http.post(globalVariable.url+'listing/getProductKeywords', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 
-    getProductFaqs(data){
+    getServiceFaqs(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/getProductFaqs', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/getServiceFaqs', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 
@@ -108,9 +108,9 @@ export class ValidationApiService {
     .map(res => res.json());
     }
     
-    saveProductProfile(data){
+    saveServiceProfile(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/saveProductProfile', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/updateServiceProfile', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 
@@ -150,15 +150,15 @@ export class ValidationApiService {
     .map(res => res.json());
     }
 
-    saveProductKeywords(data){
+    saveServiceKeywords(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/saveProductKeywords', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/saveServiceKeywords', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 
-    saveProductFaqs(data){
+    saveServiceFaqs(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/saveProductFaqs', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/saveServiceFaqs', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 

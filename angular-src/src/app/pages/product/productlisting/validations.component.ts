@@ -350,9 +350,9 @@ export class ValidationsComponent   {
         );
     }
 
-    saveProductProfile(){
-      var obj ={"Product": {"I4GProductCode": this.productForm.value.I4GProductCode,"ProductName": this.productForm.value.Productname,"SKUCode": "SKU0010","UniversalProductCode": this.productForm.value.Universalproductcode,"EuropeanArticelNumber": this.productForm.value.Europeanarticlenumber,"CompanyProductId": this.productForm.value.Companyproductid,"ProductDescription":this.productForm.value.Productdescription,"ProductionCapacity":this.productForm.value.Productioncapacity}};
-      this.validationApiService.saveProductProfile(obj).subscribe((data) => {
+    saveServiceProfile(){
+      var obj ={"Service": {"I4GServiceCode": this.productForm.value.I4GServiceCode,"ServiceName": this.productForm.value.Productname,"UniversalServiceCode": this.productForm.value.Universalproductcode,"Currency": this.productForm.value.Europeanarticlenumber,"CostDescription": this.productForm.value.Companyproductid,"ServiceDescription":this.productForm.value.Productdescription,"TermsFile":this.productForm.value.Productioncapacity}};
+      this.validationApiService.saveServiceProfile(obj).subscribe((data) => {
         $("#editproduct").modal('hide');      
         const opt = JSON.parse(JSON.stringify(this.options));
         this.toastrService[this.types[0]]('Product Profile updated successfully', 'Product Profile', opt); 
@@ -364,7 +364,7 @@ export class ValidationsComponent   {
     public getSectorIndustryDetail(){
         this.searchCategories = '';
         this.searchIndustries = '';
-        var obj = {"Product": {"I4GProductCode": this.accountForm.value.I4GProductCode}};
+        var obj = {"Service": {"I4GServiceCode": this.accountForm.value.I4GServiceCode}};
         this.validationApiService.getSectorIndustryDetail(obj).subscribe((data) => {
           if (!data.error) {
              var s_index = this.sectors.findIndex((item) => {
@@ -515,7 +515,7 @@ export class ValidationsComponent   {
 
 
     getSampleDetail(){
-        var obj = {"Product": {"I4GProductCode": this.SampleForm.value.I4GProductCode}};
+        var obj = {"Service": {"I4GServiceCode": this.SampleForm.value.I4GServiceCode}};
         this.validationApiService.getSampleDetail(obj).subscribe(
             (data) => {
               if (!data.error) {
@@ -545,7 +545,7 @@ export class ValidationsComponent   {
     }
 
     saveSampleDetail(){
-     var obj ={"Product": {"I4GProductCode" : this.SampleForm.value.I4GProductCode,"SampleCost": this.SampleForm.value.Samplecost,"SampleQuantity": this.SampleForm.value.Samplequantity,"SampleUnit": this.SampleForm.value.Sampleunit,"SampleIncoTerm": this.SampleForm.value.Sampleincoterm,"SampleNotes": this.SampleForm.value.Samplenotes,"SamplePaymentWaysJson":this.SampleForm.value.SamplePaymentWaysJson}};
+     var obj ={"Service": {"I4GServiceCode" : this.SampleForm.value.I4GServiceCode,"SampleCost": this.SampleForm.value.Samplecost,"SampleQuantity": this.SampleForm.value.Samplequantity,"SampleUnit": this.SampleForm.value.Sampleunit,"SampleIncoTerm": this.SampleForm.value.Sampleincoterm,"SampleNotes": this.SampleForm.value.Samplenotes,"SamplePaymentWaysJson":this.SampleForm.value.SamplePaymentWaysJson}};
      this.validationApiService.saveSampleDetail(obj).subscribe((data) => {
       const opt = JSON.parse(JSON.stringify(this.options));
       this.toastrService[this.types[0]]('Sample Details updated successfully', 'Sample Details', opt); 
@@ -611,14 +611,14 @@ export class ValidationsComponent   {
      });
     }
 
-    getProductMedia(){
-        var obj = {"Product": {"I4GProductCode": this.saveMediaUrl.I4GProductCode}};
-        this.validationApiService.getProductMedia(obj).subscribe(
+    getServiceMedia(){
+        var obj = {"Service": {"I4GServiceCode": this.saveMediaUrl.I4GServiceCode}};
+        this.validationApiService.getServiceMedia(obj).subscribe(
             (data) => {
               if (!data.error) {
                 console.log(data);
-                this.saveMediaUrl.ProductMedia.ImageUrls.Image = data.ProductMedia.ImageUrls.Image;
-                this.saveMediaUrl.ProductMedia.VideoUrls.Video = data.ProductMedia.VideoUrls.Video;
+                this.saveMediaUrl.ServiceMedia.ImageUrls.Image = data.ServiceMedia.ImageUrls.Image;
+                this.saveMediaUrl.ServiceMedia.VideoUrls.Video = data.ServiceMedia.VideoUrls.Video;
                 /*let arr = [];
                 for (var i = 0; i < data.ProductMedia.VideoUrls.Video.length; ++i) {
                   let imgDataObj = data.ProductMedia.VideoUrls.Video[i];
@@ -680,7 +680,7 @@ export class ValidationsComponent   {
     }
 
     public updateMediaUrls(){
-      this.saveMediaUrl.ProductMedia.VideoUrls.Video = this.saveMediaUrl.ProductMedia.VideoUrls.Video.concat(this.videoUrlsForm.value.VideoUrls);
+      this.saveMediaUrl.ProductMedia.VideoUrls.Video = this.saveMediaUrl.ServiceMedia.VideoUrls.Video.concat(this.videoUrlsForm.value.VideoUrls);
       this.videoUrlsForm.reset();
     }
 
@@ -688,7 +688,7 @@ export class ValidationsComponent   {
         if(this.file){
           let formData:FormData = new FormData();
           formData.append('file', this.file, this.file.name);
-          formData.append("i4gProductCode", this.saveMediaUrl.I4GProductCode);
+          formData.append("i4gServiceCode", this.saveMediaUrl.i4gServiceCode);
               this.validationApiService.uploadProductImage(formData).subscribe(
               (data) => {
               this.saveMediaUrl.ProductMedia.ImageUrls.Image.push({Name: this.imageUploadForm.value.Name, Url: data.message});
@@ -861,9 +861,9 @@ export class ValidationsComponent   {
     }
 
 
-    getProductKeywords(){
-      var obj = {"Product": {"I4GProductCode": this.ProductKeywordsForm.value.I4GProductCode}};
-      this.validationApiService.getProductKeywords(obj).subscribe(
+    getServiceKeywords(){
+      var obj = {"Service": {"I4GServiceCode": this.ProductKeywordsForm.value.I4GServiceCode}};
+      this.validationApiService.getServiceKeywords(obj).subscribe(
           (data) => {
             if (!data.error) {
               this.tags = data.ProductKeywords.Word;
@@ -877,12 +877,12 @@ export class ValidationsComponent   {
     public closemodal(){
       delete this.tag;
     }
-    public saveProductKeywords(){
-      var obj = {"ProductKeywords":{"I4GProductCode": this.ProductKeywordsForm.value.I4GProductCode,"Words":{"Word": this.ProductKeywordsForm.value.Word}}};
+    public saveServiceKeywords(){
+      var obj = {"ServiceKeywords":{"I4GServiceCode": this.ProductKeywordsForm.value.I4GServiceCode,"Words":{"Word": this.ProductKeywordsForm.value.Word}}};
       delete this.tag;  
-     this.validationApiService.saveProductKeywords(obj).subscribe((data) => {
+     this.validationApiService.saveServiceKeywords(obj).subscribe((data) => {
         const opt = JSON.parse(JSON.stringify(this.options));
-        this.toastrService[this.types[0]]('Product Keywords Info updated successfully', 'Product Keywords', opt);
+        this.toastrService[this.types[0]]('Service Keywords Info updated successfully', 'Service Keywords', opt);
         console.log("words", data);
      })
    }
@@ -913,9 +913,9 @@ export class ValidationsComponent   {
       this.Faqs.removeAt(i)
     }
 
-    getProductFaqs(){
-      var obj = {"Product": {"I4GProductCode": this.productspecForms.value.I4GProductCode}};
-        this.validationApiService.getProductFaqs(obj).subscribe(
+    getServiceFaqs(){
+      var obj = {"Service": {"I4GServiceCode": this.productspecForms.value.I4GServiceCode}};
+        this.validationApiService.getServiceFaqs(obj).subscribe(
             (data) => {
               if (!data.error) {
                 this.prdctFaqs = data.ProductFaqs.Faq;
@@ -944,7 +944,7 @@ export class ValidationsComponent   {
         }
     }
 
-    saveProductFaqsAdd(){
+    saveServiceFaqsAdd(){
      this.prdctFaqs = this.prdctFaqs.concat(this.productspecForms.value.Faqs); 
      this.productspecForms.controls["Faqs"].setValue([{"Question" : "", "Answer": ""}]);
      //this.productspecForms.reset();   
@@ -952,10 +952,10 @@ export class ValidationsComponent   {
 
     saveProductFaqs(){
       console.log(this.prdctFaqs);
-      var obj ={"ProductFaqs": {"I4GProductCode": this.ProductKeywordsForm.value.I4GProductCode,"Faq": this.prdctFaqs}};
-      this.validationApiService.saveProductFaqs(obj).subscribe((data) => {
+      var obj ={"ServiceFaqs": {"I4GServiceCode": this.ProductKeywordsForm.value.I4GServiceCode,"Faq": this.prdctFaqs}};
+      this.validationApiService.saveServiceFaqs(obj).subscribe((data) => {
         const opt = JSON.parse(JSON.stringify(this.options));
-        this.toastrService[this.types[0]]('Product FAQs Info updated successfully', 'Product FAQs', opt);
+        this.toastrService[this.types[0]]('Service FAQs Info updated successfully', 'Product FAQs', opt);
         this.productspecForms.controls["Faqs"].setValue([{"Question" : "", "Answer": ""}]);
          console.log("saveSampleDetail", data);
      });

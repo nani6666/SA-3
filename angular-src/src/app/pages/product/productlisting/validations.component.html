@@ -35,15 +35,15 @@
                               (click)="getSectorIndustryDetail()"><i class="fa fa-columns" aria-hidden="true"></i> Change Sector/Industry</a>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changesampledetail" (click)="getSampleDetail()"><i class="fa fa-filter" aria-hidden="true"></i> Change Sample Details</a>  
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changespecification" (click)="getProductSpecs()"><i class="fa fa-cube" aria-hidden="true"></i> Change Specifications</a>
-                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changemedia1" (click)="getProductMedia()"><i class="fa fa-picture-o" aria-hidden="true"></i> Change Media</a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changemedia1" (click)="getServiceMedia()"><i class="fa fa-picture-o" aria-hidden="true"></i> Change Media</a>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changetradedet" (click)="getTradeDetails()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Trade Details </a>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changeexporttrm" 
                               (click)="getPaymentTermsInfo()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Export Payment Terms</a>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changeexportway" 
                               (click)="getPaymentWaysInfo()"><i class="fa fa-briefcase" aria-hidden="true"></i> Change Export Payment Ways </a>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changekeyword" 
-                              (click)="getProductKeywords()"><i class="fa fa-search" aria-hidden="true" ></i> Add/Remove Keywords</a>
-                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changefaq" (click)="getProductFaqs()"><i class="fa fa-question" aria-hidden="true"></i> Add/Remove FAQs</a>
+                              (click)="getServiceKeywords()"><i class="fa fa-search" aria-hidden="true" ></i> Add/Remove Keywords</a>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Changefaq" (click)="getServiceFaqs()"><i class="fa fa-question" aria-hidden="true"></i> Add/Remove FAQs</a>
                               <!-- <a class="dropdown-item" href="#"><i class="fa fa-users" aria-hidden="true"></i> Buyers List</a>
                               <a class="dropdown-item" href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i> Get i4g Verified</a> -->
                               
@@ -248,7 +248,7 @@
 <div class="modal fade bd-example-modal-lg" id="editproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
-         <form [formGroup]="productForm" (ngSubmit)="saveProductProfile()">
+         <form [formGroup]="productForm" (ngSubmit)="saveServiceProfile()">
          <div class="modal-header">
             <h5 class="modal-title ModalLongTitle">Edit Product Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -571,7 +571,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let item of saveMediaUrl.ProductMedia.ImageUrls.Image; let i = index; ">
+                  <tr *ngFor="let item of saveMediaUrl.ServiceMedia.ImageUrls.Image; let i = index; ">
                   <th scope="row">{{i+1}}</th>
                   <td>{{item.Name}}</td>
                   <td><i class="fa fa-window-close-o fa-2x fa-icon-color-danger" (click)="removeImageUrlToList(i)"></i></td>
@@ -829,7 +829,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" (click)="closemodal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         <button (click)="saveProductKeywords()" type="submit" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+         <button (click)="saveServiceKeywords()" type="submit" class="btn btn-primary" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
@@ -839,7 +839,7 @@
    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title ModalLongTitle">Change Product FAQs</h5>
+            <h5 class="modal-title ModalLongTitle">Change Service FAQs</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>

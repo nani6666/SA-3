@@ -45,7 +45,7 @@
                </div>
             </div>
          </div>
-         <form *ngIf="step.name=='Product Details'" [formGroup]="productForm" class="row">      
+         <form *ngIf="step.name=='Service Details'" [formGroup]="productForm" class="row">      
          <div class="col-sm-6">
             <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('ProductName').hasError('required'), 'has-success' : !productForm.get('ProductName').hasError('required') }">
                <label class="form-control-label">Name</label>

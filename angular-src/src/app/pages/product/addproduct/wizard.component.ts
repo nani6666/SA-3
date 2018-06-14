@@ -101,7 +101,7 @@ export class WizardComponent {
         this.options = this.toastrService.toastrConfig;
         this.steps = [
           {name: 'Sectors & Industries', icon: 'fa-industry', active: true, valid: false, hasError:false },
-          {name: 'Product Details', icon: 'fa-product-hunt', active: false, valid: false, hasError:false },
+          {name: 'Service Details', icon: 'fa-product-hunt', active: false, valid: false, hasError:false },
           {name: 'Media', icon: 'fa-image', active: false, valid: false, hasError:false },
           {name: 'Sample Detail', icon: 'fa-info-circle', active: false, valid: false, hasError:false },
           {name: 'Trade Detail', icon: 'fa-handshake-o', active: false, valid: false, hasError:false },
