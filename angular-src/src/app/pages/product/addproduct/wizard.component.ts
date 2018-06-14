@@ -101,11 +101,13 @@ export class WizardComponent {
         this.options = this.toastrService.toastrConfig;
         this.steps = [
           {name: 'Sectors & Industries', icon: 'fa-industry', active: true, valid: false, hasError:false },
-          {name: 'Service Details', icon: 'fa-product-hunt', active: false, valid: false, hasError:false },
+          {name: 'Service Details', icon: 'fa-cube', active: false, valid: false, hasError:false },
+          {name: 'FAQs', icon: 'fa-question', active: false, valid: false, hasError:false },
+          {name: 'Specials and Promotions', icon: 'fa-bullhorn', active: false, valid: false, hasError:false },
           {name: 'Media', icon: 'fa-image', active: false, valid: false, hasError:false },
-          {name: 'Sample Detail', icon: 'fa-info-circle', active: false, valid: false, hasError:false },
-          {name: 'Trade Detail', icon: 'fa-handshake-o', active: false, valid: false, hasError:false },
-          {name: 'For Buyers', icon: 'fa-users', active: false, valid: false, hasError:false },
+          // {name: 'Sample Detail', icon: 'fa-info-circle', active: false, valid: false, hasError:false },
+          {name: 'Social Network Info', icon: 'fa-globe', active: false, valid: false, hasError:false },
+          {name: 'For Buyers', icon: 'fa-search', active: false, valid: false, hasError:false },
           {name: 'Confirm', icon: 'fa-check-square-o', active: false, valid: false, hasError:false }
         ];
 
@@ -495,16 +497,16 @@ export class WizardComponent {
            }
     }
 
-   public createProductProfile(){
+   public createServiceProfile(){
        var objspec = {"ProductSpecs" : {"Spec" : this.productForm.value.items}};
        this.productForm.value["ProductSpecs"] = objspec.ProductSpecs;
        var productFormData = {"Product" : JSON.parse(JSON.stringify(this.productForm.value))};
        delete productFormData.Product.items;
        for(var item in productFormData.Product){this.confirmDetail[item] = productFormData.Product[item]}
        delete productFormData.Product.SampleFree;
-       this.wizardApiService.createProductProfile(productFormData).subscribe((data) => {
+       this.wizardApiService.createServiceProfile(productFormData).subscribe((data) => {
          const opt = JSON.parse(JSON.stringify(this.options));
-         this.toastrService[this.types[0]]('Product Details Added successfully', 'Product Details', opt);
+         this.toastrService[this.types[0]]('Service Details Added successfully', 'Product Details', opt);
         console.log("Status data", data)
         // this.saveProductProfile();
        },(error)=> {
@@ -642,8 +644,8 @@ export class WizardComponent {
       }
      
 
-      public saveProductMedia(){
-       this.wizardApiService.saveProductMedia(this.saveMediaUrl).subscribe((data) => {
+      public saveServiceMedia(){
+       this.wizardApiService.saveServiceMedia(this.saveMediaUrl).subscribe((data) => {
          const opt = JSON.parse(JSON.stringify(this.options));
          this.toastrService[this.types[0]]('Media Added successfully', 'Media', opt);
          console.log("data", data);
@@ -739,12 +741,12 @@ export class WizardComponent {
                           step.hasError = true;
                         }  
                     }
-                    if(step.name=='Product Details'){
+                    if(step.name=='Service Details'){
                         if (productForm.valid) {
                             step.active = false;
                             step.valid = true;
                             steps[index+3].active=true;
-                            this.createProductProfile();
+                            this.createServiceProfile();
                             return true;
                         }
                         else{
@@ -756,7 +758,7 @@ export class WizardComponent {
                           if ((this.videoUrlsForm.value.VideoUrls[0].Name === "" && this.videoUrlsForm.value.VideoUrls[0].Url === "") || (this.videoUrlsForm.value.VideoUrls[0].Name != "" && this.videoUrlsForm.value.VideoUrls[0].Url != "")) {
                             step.active = false;
                             step.valid = true;
-                            this.saveProductMedia();
+                            this.saveServiceMedia();
                             if(this.productForm.value.SampleAvailability == 'Y' && this.productForm.value.SampleFree == 'N'){
                             steps[index+1].active=true;
                             }else{
@@ -783,7 +785,7 @@ export class WizardComponent {
                         }                      
                     }
 
-                    if(step.name=='Trade Detail'){
+                    if(step.name=='Social Network Info'){
                         this.saveTradeDetails();
                         //console.log("Trade Detail", tradeDetailOption.IncoTerms.Selected.length ,  tradeDetailOption.PaymentWays.Selected.length , tradeDetailOption.PaymentTerms.Selected.length);
                         if (tradeDetailOption.IncoTerms.Selected.length > 0 && tradeDetailOption.PaymentWays.Selected.length > 0 && tradeDetailOption.PaymentTerms.Selected.length > 0) {
@@ -862,7 +864,7 @@ export class WizardComponent {
                       return true;                             
                   }
 
-                  if(step.name=='Trade Detail'){
+                  if(step.name=='Social Network Info'){
                      step.active = false;
                      if(this.productForm.value.SampleAvailability == 'Y' && this.productForm.value.SampleFree == 'N'){
                         steps[index-1].active=true;

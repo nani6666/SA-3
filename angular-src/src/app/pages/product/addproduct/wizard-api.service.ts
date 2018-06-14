@@ -27,7 +27,7 @@ export class WizardApiService {
 
     getSectorsAndIndustries(){
     this.loadToken();
-    return this.http.get(globalVariable.url+'listing/getSectorsAndIndustries',{headers: this.headerDetail})
+    return this.http.get(globalVariable.url+'listing/getServiceSectors',{headers: this.headerDetail})
     .map(res => res.json());
     }
 
@@ -67,9 +67,9 @@ export class WizardApiService {
     .map(res => res.json());
     }
 
-    createProductProfile(data){
+    createServiceProfile(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/createProductProfile', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/createServiceProfile', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 
@@ -117,9 +117,9 @@ export class WizardApiService {
     .map(res => res.json());
     }
 
-    saveProductMedia(data){
+    saveServiceMedia(data){
     this.loadToken();
-    return this.http.post(globalVariable.url+'listing/saveProductMedia', data, {headers: this.headerDetail})
+    return this.http.post(globalVariable.url+'listing/saveServiceMedia', data, {headers: this.headerDetail})
     .map(res => res.json());
     }
 }
