@@ -88,10 +88,10 @@ export class ValidationsComponent   {
     };
     validationMessages = {
         'Productname': {
-            'required': 'ProductName is required.',
+            'required': 'ServiceName is required.',
         }, 
         'Productdescription': {
-            'required': 'ProductDescription is required.',
+            'required': 'ServiceDescription is required.',
         },
         'Universalproductcode': {
             'required': 'UniversalProductCode is required.',
@@ -133,29 +133,29 @@ export class ValidationsComponent   {
       this.getMyServicesList();
       this.getUnits();
       this.options = this.toastrService.toastrConfig;
-      //this.getSampleDetail();
-      //this.getProductSpecs();
-      //this.getProductFaqs();
-      //this.getProductKeywords();
-      //this.getSectorIndustryDetail();
+      // this.getSampleDetail();
+      // this.getProductSpecs();
+      // this.getProductFaqs();
+      // this.getProductKeywords();
+      // this.getSectorIndustryDetail();
       this.getSectorsAndIndustries();
-      //this.getTradeDetails();
-      //this.getPaymentWaysInfo();
+      // this.getTradeDetails();
+      // this.getPaymentWaysInfo();
 
     this.productForm = this.formBuilder.group({
-      'I4GProductCode': ['', Validators.required],
+      'I4GServiceCode': ['', Validators.required],
       'SKUCode': ['SKU0010', Validators.required],
-      'Productname': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(100)]],
-      'Productdescription': ['', [Validators.required,Validators.minLength(20),Validators.maxLength(1000)]],
-      'Universalproductcode': ['', [Validators.minLength(5),Validators.maxLength(50)]],
+      'ServiceName': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(100)]],
+      'ServiceDescription': ['', [Validators.required,Validators.minLength(20),Validators.maxLength(1000)]],
+      'UniversalServiceCode': ['', [Validators.minLength(5),Validators.maxLength(50)]],
       'Companyproductid': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
       'Productioncapacity': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
       'Europeanarticlenumber': ['', [Validators.minLength(5),Validators.maxLength(50)]],
     });
-     //this.getProductDetail();
+     // this.getProductDetail();
 
      this.accountForm = this.formBuilder.group({
-            'I4GProductCode': '',
+            'I4GServiceCode': '',
             'I4GCompanyCode': ['20171012124501084074', Validators.required],
             'IndustryCode': ['', Validators.required],
             'SectorCode': ['', Validators.required],
@@ -163,7 +163,7 @@ export class ValidationsComponent   {
 
 
       this.SampleForm = this.formBuilder.group({
-        'I4GProductCode': ['', Validators.required],
+        'I4GServiceCode': ['', Validators.required],
         'Samplecost': ['', [Validators.required, Validators.pattern('^[+]?[0-9]*')]],
         'Samplequantity': ['', [Validators.required, Validators.pattern('^[+]?[0-9]*')]],
         'Sampleunit': ['', Validators.required],
@@ -173,7 +173,7 @@ export class ValidationsComponent   {
       });
 
       this.productspecForm = this.formBuilder.group({
-          'I4GProductCode': ['', Validators.required],
+          'I4GServiceCode': ['', Validators.required],
           'items': this.formBuilder.array([this.createItem()])
       });
 
@@ -187,12 +187,12 @@ export class ValidationsComponent   {
        });
 
       this.productspecForms = this.formBuilder.group({
-          'I4GProductCode': ['', Validators.required],
+          'I4GServiceCode': ['', Validators.required],
           'Faqs': this.formBuilder.array([this.createItems()])
       });
 
      this.ProductKeywordsForm = this.formBuilder.group({
-           'I4GProductCode': ['', Validators.required],
+           'I4GServiceCode': ['', Validators.required],
            'Word': ['', Validators.required]
             });
      this.productForm.valueChanges
@@ -291,24 +291,24 @@ export class ValidationsComponent   {
         $('.viewBtn').removeClass('text-white');
         $('.statusView').removeClass('text-success'); 
         this.enbleButton = true;
-        this.productForm.controls["I4GProductCode"].setValue(selected[0].I4GProductCode);
-        this.accountForm.controls["I4GProductCode"].setValue(selected[0].I4GProductCode);
-        this.SampleForm.controls["I4GProductCode"].setValue(selected[0].I4GProductCode);
-        this.productspecForm.controls["I4GProductCode"].setValue(selected[0].I4GProductCode);
-        this.productspecForms.controls["I4GProductCode"].setValue(selected[0].I4GProductCode);
-        this.ProductKeywordsForm.controls["I4GProductCode"].setValue(selected[0].I4GProductCode);
-        this.tradeDetailOption.I4GProductCode = selected[0].I4GProductCode;
-        this.saveMediaUrl.I4GProductCode = selected[0].I4GProductCode;
-        this.PaymentWaysinfo.I4GProductCode = selected[0].I4GProductCode;
-        this.PaymentexportTerms.I4GProductCode = selected[0].I4GProductCode;
+        this.productForm.controls["I4GServiceCode"].setValue(selected[0].I4GServiceCode);
+        this.accountForm.controls["I4GServiceCode"].setValue(selected[0].I4GServiceCode);
+        this.SampleForm.controls["I4GServiceCode"].setValue(selected[0].I4GServiceCode);
+        this.productspecForm.controls["I4GServiceCode"].setValue(selected[0].I4GServiceCode);
+        this.productspecForms.controls["I4GServiceCode"].setValue(selected[0].I4GServiceCode);
+        this.ProductKeywordsForm.controls["I4GServiceCode"].setValue(selected[0].I4GServiceCode);
+        this.tradeDetailOption.I4GServiceCode = selected[0].I4GServiceCode;
+        this.saveMediaUrl.I4GServiceCode = selected[0].I4GServiceCode;
+        this.PaymentWaysinfo.I4GServiceCode = selected[0].I4GServiceCode;
+        this.PaymentexportTerms.I4GServiceCode = selected[0].I4GServiceCode;
     }
 
     onActivate(event) {
-        //console.log('Activate Event', event);
+        // console.log('Activate Event', event);
     }
 
     getServiceDetailbyid(id){
-      //var units =[];
+      // var units =[];
       this.getSectorIndustryDetailforprodct(id);
       var obj = {"Service": {"I4GServiceCode": id}};
       this.validationApiService.getServiceDetail(obj).subscribe(
@@ -332,16 +332,16 @@ export class ValidationsComponent   {
       );
     }
 
-    getServiceDetail(){
-      console.log(this.productForm.value.I4GServiceCode);
+    getServiceDetail() {
+      // console.log(this.productForm.value.I4GServiceCode);
         $("#editproduct").draggable({
         });
         var obj = {"Service": {"I4GServiceCode": this.productForm.value.I4GServiceCode}};
         this.validationApiService.getServiceDetail(obj).subscribe(
             (data) => {
-              console.log(data);
+              // console.log(data);
               if (!data.error) {
-                this.productForm.patchValue(data.Product);
+                this.productForm.patchValue(data.Service);
               }
             },
             (err)=>{
@@ -587,7 +587,7 @@ export class ValidationsComponent   {
               if (!data.error) {
                 console.log(data);
                 this.specitems = data.ProductSpecs.Spec;
-                //this.productspecForm.patchValue(data.ProductSpecs.Spec);
+                // this.productspecForm.patchValue(data.ProductSpecs.Spec);
               }
             },
             (err)=>{
@@ -606,7 +606,7 @@ export class ValidationsComponent   {
      this.validationApiService.saveProductSpecs(obj).subscribe((data) => {
         const opt = JSON.parse(JSON.stringify(this.options));
         this.toastrService[this.types[0]]('Specifications Details updated successfully', 'Specifications Details', opt); 
-       //this.productspecForm.controls["items"].setValue([{"Name" : "", "Value": ""}]);
+       // this.productspecForm.controls["items"].setValue([{"Name" : "", "Value": ""}]);
        console.log("saveSampleDetail", data);
      });
     }
@@ -919,7 +919,7 @@ export class ValidationsComponent   {
             (data) => {
               if (!data.error) {
                 this.prdctFaqs = data.ProductFaqs.Faq;
-                //this.productspecForm.patchValue(data.ProductSpecs.Spec);
+                // this.productspecForm.patchValue(data.ProductSpecs.Spec);
               }
             },
             (err)=>{
@@ -947,7 +947,7 @@ export class ValidationsComponent   {
     saveServiceFaqsAdd(){
      this.prdctFaqs = this.prdctFaqs.concat(this.productspecForms.value.Faqs); 
      this.productspecForms.controls["Faqs"].setValue([{"Question" : "", "Answer": ""}]);
-     //this.productspecForms.reset();   
+     // this.productspecForms.reset();   
     }
 
     saveProductFaqs(){

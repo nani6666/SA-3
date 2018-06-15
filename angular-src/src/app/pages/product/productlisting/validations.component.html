@@ -104,10 +104,10 @@
                      <ngx-datatable-column name="List Status" prop="ListStatus" [sortable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" let-id="value" ngx-datatable-cell-template >
                           
-                          <span class="font-weight-bold text-success" *ngIf="row.ListStatus == 'Y'" >OK</span>
-                          <span class="font-weight-bold text-dark" *ngIf="row.ListStatus == 'N'">Reject</span>
+                          <span class="font-weight-bold text-success" *ngIf="row.ListStatus == 'Active'" >OK</span>
+                          <span class="font-weight-bold text-dark" *ngIf="row.ListStatus == undefined">Reject</span>
                       
-                        </ng-template>
+                        </ng-template>ia
                     </ngx-datatable-column>
                     <ngx-datatable-column name="View" prop="I4GServiceCode" [sortable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" let-id="value" ngx-datatable-cell-template >
@@ -129,7 +129,7 @@
    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title ModalLongTitle">Product Details</h5>
+            <h5 class="modal-title ModalLongTitle">Service Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -141,16 +141,16 @@
                     <table class="table table-bordered">
                       <tbody>
                         <tr>
-                          <th scope="row">Product Code</th>
+                          <th scope="row">Service Code</th>
                           <td>{{productdetailbyids.I4GServiceCode}}</td>
                         </tr>
                         <tr>
                           <th scope="row">Service Name</th>
-                          <td>{{productdetailbyids.Servicename}}</td>
+                          <td>{{productdetailbyids.ServiceName}}</td>
                         </tr>
                         <tr>
                           <th scope="row">Universal Service Code</th>
-                          <td>{{productdetailbyids.Universalservicecode}}</td>
+                          <td>{{productdetailbyids.UniversalServiceCode}}</td>
                         </tr>
                         <tr>
                           <th scope="row">European Article Number</th>
@@ -162,7 +162,7 @@
                         </tr>
                         <tr>
                           <th scope="row">Service Description</th>
-                          <td>{{productdetailbyids.Servicedescription}}</td>
+                          <td>{{productdetailbyids.ServiceDescription}}</td>
                         </tr>
                         <tr>
                           <th scope="row">Production Capacity</th>
@@ -250,7 +250,7 @@
       <div class="modal-content">
          <form [formGroup]="productForm" (ngSubmit)="saveServiceProfile()">
          <div class="modal-header">
-            <h5 class="modal-title ModalLongTitle">Edit Product Details</h5>
+            <h5 class="modal-title ModalLongTitle">Edit Service Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -261,21 +261,21 @@
                  <div class="form-group row">
                      <label for="inputPassword" class="col-sm-12 col-form-label">Service Name</label>
                      <div class="col-sm-12">
-                        <input type="text" class="form-control" formControlName="Productname">
+                        <input type="text" class="form-control" formControlName="ServiceName">
                      </div>
                      <span class="help-block help-block-custom text-danger" style="margin-left: 18px;"*ngIf="formErrors.Productname">Please Enter at Minimum 5 letters and Maximum 100 letters</span>
                   </div>                  
                   <div class="form-group row">
                      <label for="inputPassword" class="col-sm-12 col-form-label">Company Service Code</label>
                      <div class="col-sm-12">
-                        <input type="text" class="form-control" formControlName="Companyproductid" >
+                        <input type="text" class="form-control" formControlName="I4GServiceCode" >
                      </div>
                      <span class="help-block help-block-custom text-danger" style="margin-left: 18px;"*ngIf="formErrors.Companyproductid">Please Enter at Minimum 5 letters and Maximum 50 letters</span> 
                   </div>
                  <div class="form-group row">
                      <label for="inputPassword" class="col-sm-12 col-form-label">Universal Service Code</label>
                      <div class="col-sm-12">
-                        <input type="text" class="form-control" formControlName="Universalproductcode" >
+                        <input type="text" class="form-control" formControlName="UniversalServiceCode" >
                      </div>
                      <span class="help-block help-block-custom text-danger" style="margin-left: 18px;"*ngIf="formErrors.Universalproductcode">Please Enter at Minimum 5 letters and Maximum 50 letters</span>
                   </div>
@@ -296,9 +296,9 @@
                      <span class="help-block help-block-custom text-danger" style="margin-left: 18px;"*ngIf="formErrors.Productioncapacity">Please Enter at Minimum 5 letters and Maximum 50 letters</span>
                   </div>
                   <div class="form-group row">
-                     <label for="inputPassword" class="col-sm-12 col-form-label">Product Description</label>
+                     <label for="inputPassword" class="col-sm-12 col-form-label">Service Description</label>
                      <div class="col-sm-12">
-                        <textarea rows="3" type="text" class="form-control" formControlName="Productdescription" ></textarea>
+                        <textarea rows="3" type="text" class="form-control" formControlName="ServiceDescription" ></textarea>
                      </div>
                       <span class="help-block help-block-custom text-danger" style="margin-left: 18px;" *ngIf="formErrors.Productdescription">Please Enter at Minimum 20 letters and Maximum 1000 letters</span> 
                   </div>  
