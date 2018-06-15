@@ -64,13 +64,13 @@ export class ValidationsComponent   {
                                      "PaymentWays": {"Selected": []},
                                      "PaymentTerms": { "Selected": []}
                                     };
-    public saveMediaUrl :any =  { "I4GProductCode":"",
-                                  "ProductMedia":{ 
+    public saveMediaUrl :any =  { "I4GServiceCode":"",
+                                  "ServiceMedia":{ 
                                   "ImageUrls": { "Image": [] },
                                   "VideoUrls": { "Video": [] }
                                   }
                                  };   
-     public PaymentWaysinfo: any = {"I4GProductCode": "",   
+     public PaymentWaysinfo: any = {"I4GServiceCode": "",   
                                      "PaymentWays": { "Selected": []}
                                     };     
 
