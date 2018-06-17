@@ -260,7 +260,7 @@ export class ValidationsComponent   {
                 this.loadingIndicator = false;
               }
             },
-            (err)=>{
+            (err)=> {
                 console.log('kfgbhj')
             }
         );
@@ -313,7 +313,7 @@ export class ValidationsComponent   {
       var obj = {"Service": {"I4GServiceCode": id}};
       this.validationApiService.getServiceDetail(obj).subscribe(
           (data) => {
-            // console.log(data);
+            console.log(data);
             if (!data.error) {
               this.productdetailbyids = data.Service;
               var uuname = this.UnitS.filter((item) => {

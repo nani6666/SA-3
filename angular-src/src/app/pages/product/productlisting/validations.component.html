@@ -104,8 +104,8 @@
                      <ngx-datatable-column name="List Status" prop="ListStatus" [sortable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" let-id="value" ngx-datatable-cell-template >
                           
-                          <span class="font-weight-bold text-success" *ngIf="row.ListStatus == 'Active'" >OK</span>
-                          <span class="font-weight-bold text-dark" *ngIf="row.ListStatus == undefined">Reject</span>
+                          <span class="font-weight-bold text-success" *ngIf="row.ListStatus == 'Y'" >OK</span>
+                          <span class="font-weight-bold text-dark" *ngIf="row.ListStatus == undefined"></span>
                       
                         </ng-template>ia
                     </ngx-datatable-column>
@@ -137,7 +137,7 @@
          <div class="modal-body">
             <div class="row">
                 <div class="col-sm-6">
-                  <h6>Product Details</h6>
+                  <h6>Service Details</h6>
                     <table class="table table-bordered">
                       <tbody>
                         <tr>
@@ -227,7 +227,7 @@
                         </tr>
                         <tr>
                           <th scope="row">Last Modified</th>
-                          <td>{{productdetailbyids.Lastmodified | date : 'dd-MM-yyyy'}}</td>
+                          <td>{{productdetailbyids.LastModified | date : 'dd-MM-yyyy'}}</td>
                         </tr>
                       </tbody>
                     </table>

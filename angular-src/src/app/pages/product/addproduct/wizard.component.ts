@@ -427,7 +427,8 @@ export class WizardComponent {
 
     public getSectorsAndIndustries(){
            this.wizardApiService.getSectorsAndIndustries().subscribe((data) => {
-           this.sectors = data.Details.Sectors.Sector.map((obj) => { obj.active = false; return obj; });
+             console.log(data);
+           this.sectors = data.ServiceDetails.Sectors.Sector.map((obj) => { obj.active = false; return obj; });
        }, (error)=> {
            this.sectors = [];
            });
