@@ -69,7 +69,7 @@ export class WizardComponent {
       'ProductName': '' ,
       'ProductDescription': '' ,
       'UniversalProductCode': '', 
-      'EuropeanArticelNumber': '' ,
+      'costInformation': '' ,
       'ProductionCapacity': '', 
       'CompanyProductId': '' 
     };
@@ -83,8 +83,8 @@ export class WizardComponent {
         'UniversalProductCode': {
             'required': 'UniversalProductCode is required.',
         },
-        'EuropeanArticelNumber': {
-            'required': 'EuropeanArticelNumber is required.',
+        'costInformation': {
+            'required': 'Cost Information is required.',
         },
         'ProductionCapacity': {
             'required': 'ProductionCapacity is required.',
@@ -124,7 +124,7 @@ export class WizardComponent {
             'ProductName': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(100)]],
             'ProductDescription': ['', [Validators.required,Validators.minLength(20),Validators.maxLength(1000)]],
             'UniversalProductCode': ['', [Validators.minLength(5),Validators.maxLength(50)]],
-            'EuropeanArticelNumber': ['', [Validators.minLength(5),Validators.maxLength(50)]],
+            'costInformation': ['', [Validators.required ,Validators.minLength(5),Validators.maxLength(50)]],
             'CompanyProductId': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
             'ProductionCapacity': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50), Validators.pattern('^[+]?[0-9]*[a-z]*[A-Z]*')]],
             'SampleAvailability': ['N', Validators.required],
@@ -293,8 +293,8 @@ export class WizardComponent {
     }
 
     public saveSectorIndustryDetail(){       
-         this.sectors.map((item) => { if(item.Code == this.accountForm.value.SectorCode){ this.confirmDetail["SectorName"] = item.Name }});
-         this.industries.map((item) => { if(item.Code == this.accountForm.value.IndustryCode){ this.confirmDetail["IndustryName"] = item.Name }});
+         this.sectors.map((item) => { if(item.Code == this.accountForm.value.SectorCode){ this.confirmDetail["SectorCode"] = item.Code }});
+         this.industries.map((item) => { if(item.Code == this.accountForm.value.IndustryCode){ this.confirmDetail["IndustryName"] = item.Code }});
          console.log("this.confirmDetail", this.confirmDetail);
          var obj = {"Product": this.accountForm.value};
          if(typeof this.productId == 'undefined'){
@@ -302,18 +302,19 @@ export class WizardComponent {
                const opt = JSON.parse(JSON.stringify(this.options));
                this.toastrService[this.types[0]]('Sectors & industries Added successfully', 'Sectors & industries', opt); 
                this.productId = data.message;
-               this.productForm.controls["I4GProductCode"].setValue(this.productId);
-               this.sampleDetail.controls["I4GProductCode"].setValue(this.productId);
-               this.tradeDetailForm.controls["I4GProductCode"].setValue(this.productId);
-               this.ProductKeywordsForm.controls["I4GProductCode"].setValue(this.productId);
-               this.tradeDetailOption.I4GProductCode = this.productId;
-               this.saveMediaUrl.I4GProductCode = this.productId;
+               this.productForm.controls["I4GServiceCode"].setValue(this.productId);
+               this.sampleDetail.controls["I4GServiceCode"].setValue(this.productId);
+               this.tradeDetailForm.controls["I4GServiceCode"].setValue(this.productId);
+               this.ProductKeywordsForm.controls["I4GServiceCode"].setValue(this.productId);
+               this.tradeDetailOption.I4GServiceCode = this.productId;
+               this.saveMediaUrl.I4GServiceCode = this.productId;
               },(error) => {
                console.log("error", error);
               }
             );         
          }else{
-           var newobj = {"Product": {"I4GProductCode": this.productId,"I4GCompanyCode": this.accountForm.value.I4GCompanyCode,"SectorCode": this.accountForm.value.SectorCode,"IndustryCode": this.accountForm.value.IndustryCode}}
+           var newobj = {"Service": {"I4GCompanyCode": this.accountForm.value.I4GCompanyCode,"SectorCode": this.accountForm.value.SectorCode,
+                    "IndustryCode": this.accountForm.value.IndustryCode}}
             this.wizardApiService.saveSectorIndustryDetail(newobj).subscribe((data) => {
                const opt = JSON.parse(JSON.stringify(this.options));
                this.toastrService[this.types[0]]('Sectors & industries Updated successfully', 'Sectors & industries', opt);
@@ -461,18 +462,20 @@ export class WizardComponent {
     }*/
 
 
-    public selectSector(code){
+    public selectSector(code) {
+      console.log(code);
       this.searchIndustries = '';
       var index = this.sectors.findIndex((item) => {
       return item.Code == code;
       });
-       if(index > -1){
+       if(index > -1) {
            this.sectors = this.sectors.map((obj) => { obj.active = false; return obj; });
            this.sectors[index].active = true;
            this.accountForm.controls["SectorCode"].setValue(this.sectors[index].Code);
-           var obj = {"Sector": {"Code": this.sectors[index].Code}};
+           var obj = {"Sector": {"SectorCode": this.sectors[index].Code}};
            this.wizardApiService.getIndustriesBySector(obj).subscribe((data) =>{
-           this.industries = data.Industries.Industry.map((obj) => { obj.active = false; return obj; });
+             console.log(data);
+           this.industries = data.Details.Industries.Industry.map((obj) => { obj.active = false; return obj; });
            
            if(this.industries.length > 0){
                this.industries[0].active = true;    
@@ -569,12 +572,12 @@ export class WizardComponent {
     public saveTradeDetails(){
       if(this.tradeDetailOption.IncoTerms.Selected.length === 0){
        this.penelError1 = true;
-      }else{
+      } else{
         this.penelError1 = false;
       }
       if(this.tradeDetailOption.PaymentWays.Selected.length === 0){
         this.penelError2 = true;
-      }else{
+      } else{
         this.penelError2 = false;
       }
       if(this.tradeDetailOption.PaymentTerms.Selected.length === 0){

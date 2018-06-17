@@ -60,16 +60,16 @@
                 <span class="help-block help-block-custom text-danger" *ngIf="formErrors.ProductDescription">Please Enter at Minimum 20 letters and Maximum 1000 letters</span>                           
             </div>
             <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('UniversalProductCode').hasError('required'), 'has-success' : !productForm.get('UniversalProductCode').hasError('required') }">
-               <label class="form-label">Universal Product Code</label>
+               <label class="form-label">Universal Service Code</label>
                <input style="border: unset;" formControlName="UniversalProductCode" [ngClass]="{'form-control-danger' :  productForm.get('UniversalProductCode').hasError('required') }" type="text" class="form-control"> 
                <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('UniversalProductCode').hasError('required')">Universal Product Code is required</span>  
                <span class="help-block help-block-custom text-danger" *ngIf="formErrors.UniversalProductCode">Please Enter at Minimum 5 letters and Maximum 50 letters</span>                            
             </div>
-            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('EuropeanArticelNumber').hasError('required'), 'has-success' : !productForm.get('EuropeanArticelNumber').hasError('required') }">
-               <label class="form-control-label">European Article No</label>
-               <input style="border: unset;"formControlName="EuropeanArticelNumber" [ngClass]="{'form-control-danger' :  productForm.get('EuropeanArticelNumber').hasError('required') }" type="text"class="form-control"> 
-               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('EuropeanArticelNumber').hasError('required')">European Article  Number code is required</span>
-               <span class="help-block help-block-custom text-danger" *ngIf="formErrors.EuropeanArticelNumber">Please Enter at Minimum 5 letters and Maximum 50 letters</span>
+            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('costInformation').hasError('required'), 'has-success' : !productForm.get('costInformation').hasError('required') }">
+               <label class="form-control-label">Cost Information</label>
+               <input formControlName="costInformation" [ngClass]="{'form-control-danger' :  productForm.get('costInformation').hasError('required') }" type="text"class="form-control"> 
+               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('costInformation').hasError('required')">Cost Information is required</span>
+               <span class="help-block help-block-custom text-danger" *ngIf="formErrors.costInformation">Please Enter at Minimum 5 letters and Maximum 50 letters</span>
             </div>
             <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('CompanyProductId').hasError('required'), 'has-success' : !productForm.get('CompanyProductId').hasError('required') }">
                <label class="form-control-label">Company Product Code </label>
