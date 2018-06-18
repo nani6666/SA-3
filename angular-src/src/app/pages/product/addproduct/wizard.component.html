@@ -71,34 +71,40 @@
                <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('costInformation').hasError('required')">Cost Information is required</span>
                <span class="help-block help-block-custom text-danger" *ngIf="formErrors.costInformation">Please Enter at Minimum 5 letters and Maximum 50 letters</span>
             </div>
-            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('CompanyProductId').hasError('required'), 'has-success' : !productForm.get('CompanyProductId').hasError('required') }">
+            <!-- <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('CompanyProductId').hasError('required'), 'has-success' : !productForm.get('CompanyProductId').hasError('required') }">
                <label class="form-control-label">Company Product Code </label>
                <input formControlName="CompanyProductId" [ngClass]="{'form-control-danger' :  productForm.get('CompanyProductId').hasError('required'), 'form-control-success' :  !productForm.get('CompanyProductId').hasError('required') }" type="text" class="form-control"> 
                <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('CompanyProductId').hasError('required')">Company product code  is required</span> 
                <span class="help-block help-block-custom text-danger" *ngIf="formErrors.CompanyProductId">Please Enter at Minimum 5 letters and Maximum 50 letters</span>           
+            </div> -->
+            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('currency').hasError('required'), 'has-success' : !productForm.get('currency').hasError('required') }">
+               <label class="form-control-label">Currency</label>
+               <select formControlName="currency" [ngClass]="{'form-control-danger' :  productForm.get('currency').hasError('required'), 'form-control-success' :  !productForm.get('currency').hasError('required') }"  class="form-control">
+                     <option value="">Choose Currency</option>
+                     <option value="USD">USD</option>
+                     <option value="INR">INR</option>
+                     <option value="EUR">EUR</option>
+                     <option value="GBP">GBP</option>
+                     <option value="AUD">AUD</option>
+                     <option value="NZD">NZD</option>
+                     <option value="ZAR">ZAR</option>
+                     <option value="JPY">JPY</option>
+               </select> 
+               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('currency').hasError('required')">Currency is required</span>
             </div>
-            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('ProductionCapacity').hasError('required'), 'has-success' : !productForm.get('ProductionCapacity').hasError('required') }">
-               <label class="form-control-label">Production Capacity</label>
-               <input formControlName="ProductionCapacity" [ngClass]="{'form-control-danger' :  productForm.get('ProductionCapacity').hasError('required'), 'form-control-success' :  !productForm.get('ProductionCapacity').hasError('required') }" type="text" class="form-control"> 
-               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('ProductionCapacity').hasError('required')">Production Capacity is required</span>   
-               <!-- <span class="help-block help-block-custom text-danger" *ngIf="formErrors.ProductionCapacity">Please Enter at Minimum 5 letters and Maximum 50 letters</span>          -->
-               <span class="help-block help-block-custom text-danger" *ngIf="formErrors.ProductionCapacity">{{ formErrors.ProductionCapacity }}</span>         
-            </div>
-            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('SampleAvailability').hasError('required'), 'has-success' : !productForm.get('SampleAvailability').hasError('required') }" style="display: -webkit-box;">
+            <!-- <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('SampleAvailability').hasError('required'), 'has-success' : !productForm.get('SampleAvailability').hasError('required') }" style="display: -webkit-box;">
                <div class="text-vertical">
                <label class="form-control-label">Is Sample Available ?</label>
             </div>
             <div>
-               
-           
                <label class="switch">
                <input type="checkbox" (click)="updateSampleAvailability()">
                <span class="slider round"></span>
                </label>
                <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('SampleAvailability').hasError('required')">Sample Availability is required</span>     
                 </div>       
-            </div>
-            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('SampleFree').hasError('required'), 'has-success' : !productForm.get('SampleFree').hasError('required') }" style="display: -webkit-box;">
+            </div> -->
+            <!-- <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('SampleFree').hasError('required'), 'has-success' : !productForm.get('SampleFree').hasError('required') }" style="display: -webkit-box;">
                 <div class="text-vertical">
                <label class="form-control-label">Is Sample Free ?</label>
                </div>
@@ -109,7 +115,7 @@
                </label>
                <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('SampleFree').hasError('required')">Sample Free is required</span>
                </div>
-            </div>
+            </div> -->
          </div>
          <div class="col-sm-6">
             <h5> Specifications </h5>
@@ -141,6 +147,11 @@
             </table>
             <div class="text-center"><i class="fa fa-plus-square-o fa-2x fa-icon-color-success " aria-hidden="true" (click)="addItem()"></i></div>
          </div>
+         </form>
+         <form *ngIf="step.name=='FAQs'" class="" [formGroup]="faqform">
+          <div>
+           <input type="text" class="form-control" formControlName="faqname">
+          </div>
          </form>
          <div *ngIf="step.name=='Media'" class="row">
             <div class="col-sm-6">

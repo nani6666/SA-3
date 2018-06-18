@@ -30,6 +30,7 @@ export class WizardComponent {
     public sampleDetail:FormGroup;
     public ProductKeywordsForm:FormGroup;
     public tradeDetailForm:FormGroup;
+    public faqform:FormGroup;
     public productId:any;
     public details:any = {};
     public showConfirm:boolean;
@@ -70,8 +71,7 @@ export class WizardComponent {
       'ProductDescription': '' ,
       'UniversalProductCode': '', 
       'costInformation': '' ,
-      'ProductionCapacity': '', 
-      'CompanyProductId': '' 
+      'currency': ''
     };
     validationMessages = {
         'ProductName': {
@@ -86,18 +86,13 @@ export class WizardComponent {
         'costInformation': {
             'required': 'Cost Information is required.',
         },
-        'ProductionCapacity': {
+        'currency': {
             'required': 'ProductionCapacity is required.',
-            'pattern': 'ProductionCapacity can not be negative.',
-            'minlength': 'Please Enter at Minimum 5 letters and Maximum 50 letters.',
-            'maxlength': 'Please Enter at Minimum 5 letters and Maximum 50 letters.',
-        },
-        'CompanyProductId': {
-            'required': 'CompanyProductId is required.',
-        },     
+        }
     };
 
-    constructor(private http: Http, private formBuilder: FormBuilder, private wizardApiService: WizardApiService, private router : Router,public toastrService: ToastrService) {   
+    constructor(private http: Http, private formBuilder: FormBuilder, private wizardApiService: WizardApiService, 
+                             private router : Router,public toastrService: ToastrService) {
         this.options = this.toastrService.toastrConfig;
         this.steps = [
           {name: 'Sectors & Industries', icon: 'fa-industry', active: true, valid: false, hasError:false },
@@ -110,7 +105,7 @@ export class WizardComponent {
           {name: 'For Buyers', icon: 'fa-search', active: false, valid: false, hasError:false },
           {name: 'Confirm', icon: 'fa-check-square-o', active: false, valid: false, hasError:false }
         ];
-
+         
          this.accountForm = this.formBuilder.group({
             'I4GProductCode': '',
             'I4GCompanyCode': ['20171012124501084074', Validators.required],
@@ -119,19 +114,18 @@ export class WizardComponent {
           });
 
         this.productForm = this.formBuilder.group({
-            'I4GProductCode': ['', Validators.required],
+            'I4GServiceCode': ['', Validators.required],
             'SKUCode': ['SKU0010', Validators.required],
             'ProductName': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(100)]],
             'ProductDescription': ['', [Validators.required,Validators.minLength(20),Validators.maxLength(1000)]],
             'UniversalProductCode': ['', [Validators.minLength(5),Validators.maxLength(50)]],
             'costInformation': ['', [Validators.required ,Validators.minLength(5),Validators.maxLength(50)]],
-            'CompanyProductId': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
-            'ProductionCapacity': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50), Validators.pattern('^[+]?[0-9]*[a-z]*[A-Z]*')]],
-            'SampleAvailability': ['N', Validators.required],
-            'SampleFree': ['N', Validators.required],
+            'currency': ['', [Validators.required]],
             'items': this.formBuilder.array([this.createItem()])
         });
-
+        this.faqform = this.formBuilder.group({
+          'faqname': ['', Validators.required]
+        });
         this.imageUploadForm = this.formBuilder.group({
            'Name': ['', Validators.required],
            'Image': ['', Validators.required]
@@ -296,7 +290,7 @@ export class WizardComponent {
          this.sectors.map((item) => { if(item.Code == this.accountForm.value.SectorCode){ this.confirmDetail["SectorCode"] = item.Code }});
          this.industries.map((item) => { if(item.Code == this.accountForm.value.IndustryCode){ this.confirmDetail["IndustryName"] = item.Code }});
          console.log("this.confirmDetail", this.confirmDetail);
-         var obj = {"Product": this.accountForm.value};
+         var obj = {"Service": this.accountForm.value};
          if(typeof this.productId == 'undefined'){
             this.wizardApiService.saveSectorIndustryDetail(obj).subscribe((data) => {
                const opt = JSON.parse(JSON.stringify(this.options));
@@ -319,10 +313,10 @@ export class WizardComponent {
                const opt = JSON.parse(JSON.stringify(this.options));
                this.toastrService[this.types[0]]('Sectors & industries Updated successfully', 'Sectors & industries', opt);
                this.productId = data.message;
-               this.productForm.controls["I4GProductCode"].setValue(this.productId);
-               this.sampleDetail.controls["I4GProductCode"].setValue(this.productId);
-               this.tradeDetailForm.controls["I4GProductCode"].setValue(this.productId);
-               this.ProductKeywordsForm.controls["I4GProductCode"].setValue(this.productId);
+               this.productForm.controls["I4GServiceCode"].setValue(this.productId);
+               this.sampleDetail.controls["I4GServiceCode"].setValue(this.productId);
+               this.tradeDetailForm.controls["I4GServiceCode"].setValue(this.productId);
+               this.ProductKeywordsForm.controls["I4GServiceCode"].setValue(this.productId);
                this.tradeDetailOption.I4GProductCode = this.productId;
                this.saveMediaUrl.I4GProductCode = this.productId;
             },(error) => {
@@ -369,7 +363,8 @@ export class WizardComponent {
     public addItemCostTrade(i): void {
       var flag = 0;
       for (let i = 0; i < this.tradeDetailForm.value.CostDetail.length; i++) {
-        if(this.tradeDetailForm.value.CostDetail[i].Cost && this.tradeDetailForm.value.CostDetail[i].Quantity && this.tradeDetailForm.value.CostDetail[i].Unit ){
+        if(this.tradeDetailForm.value.CostDetail[i].Cost && this.tradeDetailForm.value.CostDetail[i].Quantity && 
+                                   this.tradeDetailForm.value.CostDetail[i].Unit ) {
           flag++;  
         }
       }
@@ -395,8 +390,7 @@ export class WizardComponent {
       if( this.productForm.value.items.length == flag) {
           this.items = this.productForm.get('items') as FormArray;
           this.items.push(this.createItem());
-      }  
-            
+      }
     }
 
     public removeItem(i): void {
@@ -407,24 +401,24 @@ export class WizardComponent {
     }
 
 
-    public updateSampleAvailability(){
-           if(this.productForm.value.SampleAvailability == 'N'){
-              this.productForm.controls["SampleAvailability"].setValue('Y');  
-           }else{
-             this.productForm.controls["SampleAvailability"].setValue('N');    
-           }
-           console.log("avail", this.productForm.value.SampleAvailability);
-    }
+    // public updateSampleAvailability(){
+    //        if(this.productForm.value.SampleAvailability == 'N'){
+    //           this.productForm.controls["SampleAvailability"].setValue('Y');  
+    //        }else{
+    //          this.productForm.controls["SampleAvailability"].setValue('N');    
+    //        }
+    //        console.log("avail", this.productForm.value.SampleAvailability);
+    // }
 
-    public updateSampleFree(){
-           if(this.productForm.value.SampleFree == 'N'){
-             this.productForm.controls["SampleFree"].setValue('Y');  
-           }else{
-             this.productForm.controls["SampleFree"].setValue('N');  
-           }
-           console.log("avail", this.productForm.value.SampleFree);
+    // public updateSampleFree(){
+    //        if(this.productForm.value.SampleFree == 'N'){
+    //          this.productForm.controls["SampleFree"].setValue('Y');  
+    //        }else{
+    //          this.productForm.controls["SampleFree"].setValue('N');  
+    //        }
+    //        console.log("avail", this.productForm.value.SampleFree);
 
-         }
+    //      }
 
     public getSectorsAndIndustries(){
            this.wizardApiService.getSectorsAndIndustries().subscribe((data) => {
@@ -671,10 +665,11 @@ export class WizardComponent {
       this.toastrService[this.types[0]]('Product Url Deleted successfully', 'Product Url', opt);
     }
 
-    public next(){
+    public next() {
         let accountForm = this.accountForm;
         let productForm = this.productForm;
         let sampleDetail = this.sampleDetail;
+        let faqform = this.faqform;
         let ProductKeywordsForm = this.ProductKeywordsForm;
         let tradeDetailForm = this.tradeDetailForm;
         let tradeDetailOption = this.tradeDetailOption;
@@ -682,11 +677,10 @@ export class WizardComponent {
 
         if(this.steps[this.steps.length-1].active)
         return false;
-            
         this.steps.some((step, index, steps) =>{
             if(index < steps.length-1){
                 if(step.active){
-                    if(step.name=='Sectors & Industries'){                        
+                    if(step.name=='Sectors & Industries') {
                         if (accountForm.valid) {
                             var index1 = this.sectors.findIndex((item) => {
                               return item.Code == this.accountForm.value.SectorCode;
@@ -704,20 +698,20 @@ export class WizardComponent {
                                           step.valid = true;
                                           steps[index+1].active=true;
                                           this.saveSectorIndustryDetail();     
-                                        }else{
+                                        } else{
                                           steps[0].active=true;
                                         }
-                                      }else{
+                                      } else {
                                         step.active = false;
                                         step.valid = true;
                                         steps[index+1].active=true;
                                         this.saveSectorIndustryDetail();
                                       } 
                                     }
-                                }else{
+                                } else {
                                   steps[0].active=true;
                                 }
-                              }else{
+                              } else {
                                 var index2 = this.industries.findIndex((item) => {
                                 return item.Code == this.accountForm.value.IndustryCode;
                                 });
@@ -728,10 +722,10 @@ export class WizardComponent {
                                       step.valid = true;
                                       steps[index+1].active=true;
                                       this.saveSectorIndustryDetail();
-                                    }else{
+                                    } else {
                                       steps[0].active=true;
                                     }
-                                  }else{
+                                  } else {
                                     step.active = false;
                                     step.valid = true;
                                     steps[index+1].active=true;
@@ -740,24 +734,36 @@ export class WizardComponent {
                                 }
                               }
                             }   
-                            return true;                         
-                        }else{
+                            return true;
+                        } else {
                           step.hasError = true;
                         }  
                     }
-                    if(step.name=='Service Details'){
+                    if(step.name=='Service Details') {
+                      console.log(index);
+                      console.log(productForm.valid);
                         if (productForm.valid) {
-                            step.active = false;
-                            step.valid = true;
-                            steps[index+3].active=true;
-                            this.createServiceProfile();
-                            return true;
+                          step.hasError = true;
+                        } else {
+                          step.active = false;
+                          step.valid = true;
+                          steps[index+3].active=true;
+                          this.createServiceProfile();
+                          return true;
                         }
-                        else{
-                            step.hasError = true;
-                        }                      
+                    } if(step.name=='FAQs') {
+                      console.log(index);
+                      if (faqform.valid) {
+                        step.active = false;
+                        step.valid = true;
+                        steps[index+1].active=true;
+                        // this.createServiceProfile();
+                        return true;
+                    } else {
+                        step.hasError = true;
                     }
-                    if(step.name=='Media'){
+                    }
+                    if(step.name=='Media') {
                         if (saveMediaUrl.ProductMedia.ImageUrls.Image.length > 0 && saveMediaUrl.ProductMedia.VideoUrls.Video.length > 0) {
                           if ((this.videoUrlsForm.value.VideoUrls[0].Name === "" && this.videoUrlsForm.value.VideoUrls[0].Url === "") || (this.videoUrlsForm.value.VideoUrls[0].Name != "" && this.videoUrlsForm.value.VideoUrls[0].Url != "")) {
                             step.active = false;
@@ -769,11 +775,11 @@ export class WizardComponent {
                             steps[index+2].active=true;
                             }
                             return true;
-                          }               
+                          }
                         }
                         /*else{
                             step.hasError = true;
-                        }*/                      
+                        }*/
                     }
 
                     if(step.name=='Sample Detail'){
@@ -852,7 +858,7 @@ export class WizardComponent {
                       steps[index-1].active=true;
                       return true;
                   }
-                  if(step.name=='Product Details'){
+                  if(step.name=='Service Details'){
                       step.active = false;
                       steps[index-1].active=true;
                       return true;                   
