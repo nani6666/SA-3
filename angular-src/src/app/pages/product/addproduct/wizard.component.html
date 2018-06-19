@@ -47,17 +47,17 @@
          </div>
          <form *ngIf="step.name=='Service Details'" [formGroup]="productForm" class="row">      
          <div class="col-sm-6">
-            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('ProductName').hasError('required'), 'has-success' : !productForm.get('ProductName').hasError('required') }">
+            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('serviceName').hasError('required'), 'has-success' : !productForm.get('serviceName').hasError('required') }">
                <label class="form-control-label">Name</label>
-               <input formControlName="ProductName"  [ngClass]="{'form-control-danger' :  productForm.get('ProductName').hasError('required'), 'form-control-success' :  !productForm.get('ProductName').hasError('required') }" type="text" class="form-control"> 
-               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('ProductName').hasError('required')">Name is required</span>
-               <span class="help-block help-block-custom text-danger" *ngIf="formErrors.ProductName">Please Enter at Minimum 5 letters and Maximum 100 letters</span>
+               <input formControlName="serviceName"  [ngClass]="{'form-control-danger' :  productForm.get('serviceName').hasError('required'), 'form-control-success' :  !productForm.get('serviceName').hasError('required') }" type="text" class="form-control"> 
+               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('serviceName').hasError('required')">Name is required</span>
+               <span class="help-block help-block-custom text-danger" *ngIf="formErrors.serviceName">Please Enter at Minimum 5 letters and Maximum 100 letters</span>
             </div>
-            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('ProductDescription').hasError('required'), 'has-success' : !productForm.get('ProductDescription').hasError('required') }">
+            <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('serviceDescription').hasError('required'), 'has-success' : !productForm.get('serviceDescription').hasError('required') }">
                <label class="form-control-label">Description</label>
-               <textarea formControlName="ProductDescription" class="form-control" [ngClass]="{'form-control-danger' :  productForm.get('ProductDescription').hasError('required'), 'form-control-success' :  !productForm.get('ProductDescription').hasError('required') }" type="text"></textarea> 
-               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('ProductDescription').hasError('required')">Description is required</span>  
-                <span class="help-block help-block-custom text-danger" *ngIf="formErrors.ProductDescription">Please Enter at Minimum 20 letters and Maximum 1000 letters</span>                           
+               <textarea formControlName="serviceDescription" class="form-control" [ngClass]="{'form-control-danger' :  productForm.get('serviceDescription').hasError('required'), 'form-control-success' :  !productForm.get('serviceDescription').hasError('required') }" type="text"></textarea> 
+               <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('serviceDescription').hasError('required')">Description is required</span>  
+                <span class="help-block help-block-custom text-danger" *ngIf="formErrors.serviceDescription">Please Enter at Minimum 20 letters and Maximum 1000 letters</span>                           
             </div>
             <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('UniversalProductCode').hasError('required'), 'has-success' : !productForm.get('UniversalProductCode').hasError('required') }">
                <label class="form-label">Universal Service Code</label>
@@ -67,9 +67,9 @@
             </div>
             <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('costInformation').hasError('required'), 'has-success' : !productForm.get('costInformation').hasError('required') }">
                <label class="form-control-label">Cost Information</label>
-               <input formControlName="costInformation" [ngClass]="{'form-control-danger' :  productForm.get('costInformation').hasError('required') }" type="text"class="form-control"> 
+               <textarea formControlName="costInformation" [ngClass]="{'form-control-danger' :  productForm.get('costInformation').hasError('required') }" class="form-control"> </textarea>
                <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('costInformation').hasError('required')">Cost Information is required</span>
-               <span class="help-block help-block-custom text-danger" *ngIf="formErrors.costInformation">Please Enter at Minimum 5 letters and Maximum 50 letters</span>
+               <span class="help-block help-block-custom text-danger" *ngIf="formErrors.costInformation">Please Enter at Minimum 5 letters and Maximum 500 letters</span>
             </div>
             <!-- <div class="form-group" [ngClass]="{'has-danger' : step.hasError && productForm.get('CompanyProductId').hasError('required'), 'has-success' : !productForm.get('CompanyProductId').hasError('required') }">
                <label class="form-control-label">Company Product Code </label>
@@ -149,10 +149,52 @@
          </div>
          </form>
          <form *ngIf="step.name=='FAQs'" class="" [formGroup]="faqform">
-          <div>
-           <input type="text" class="form-control" formControlName="faqname">
+          <div class="row">
+            <div class="col-sm-2">
+
+            </div>    
+            <div class="col-sm-8">
+                <div class="form-group" >
+                      <label class="form-label">Name</label>
+                       <input  formControlName="faqname" type="text" class="form-control"> 
+                                    <!-- <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('UniversalProductCode').hasError('required')">Universal Product Code is required</span>  
+                                    <span class="help-block help-block-custom text-danger" *ngIf="formErrors.UniversalProductCode">Please Enter at Minimum 5 letters and Maximum 50 letters</span>                             -->
+                   </div>
+                  <div class="form-group">
+                      <label class="form-control-label">Description</label>
+                      <textarea formControlName="faqDesc"  class="form-control"> </textarea>
+                                    <!-- <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('costInformation').hasError('required')">Cost Information is required</span>
+                                    <span class="help-block help-block-custom text-danger" *ngIf="formErrors.costInformation">Please Enter at Minimum 5 letters and Maximum 500 letters</span> -->
+                  </div>
+            </div> 
+            <div class="col-sm-2">
+
+            </div> 
+           
           </div>
          </form>
+         <form *ngIf="step.name=='Specials and Promotions'" class="" [formGroup]="specialpromotions">
+                  <div class="row">   
+                    <div class="col-sm-6">
+                        <div class="form-group" >
+                              <label class="form-label">Special Information</label>
+                              <textarea formControlName="specialInformation"  class="form-control"> </textarea>
+                                            <!-- <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('UniversalProductCode').hasError('required')">Universal Product Code is required</span>  
+                                            <span class="help-block help-block-custom text-danger" *ngIf="formErrors.UniversalProductCode">Please Enter at Minimum 5 letters and Maximum 50 letters</span>                             -->
+                           </div>
+                          <div class="form-group">
+                              <label class="form-control-label">Promotion Information</label>
+                              <textarea formControlName="promotionInformation"  class="form-control"> </textarea>
+                                            <!-- <span class="help-block help-block-custom text-danger" *ngIf="step.hasError && productForm.get('costInformation').hasError('required')">Cost Information is required</span>
+                                            <span class="help-block help-block-custom text-danger" *ngIf="formErrors.costInformation">Please Enter at Minimum 5 letters and Maximum 500 letters</span> -->
+                          </div>
+                    </div> 
+                    <div class="col-sm-2">
+        
+                    </div> 
+                   
+                  </div>
+                 </form>
          <div *ngIf="step.name=='Media'" class="row">
             <div class="col-sm-6">
                <div class="panel">

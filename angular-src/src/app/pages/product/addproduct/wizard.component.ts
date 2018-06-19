@@ -31,6 +31,7 @@ export class WizardComponent {
     public ProductKeywordsForm:FormGroup;
     public tradeDetailForm:FormGroup;
     public faqform:FormGroup;
+    public specialpromotions: FormGroup;
     public productId:any;
     public details:any = {};
     public showConfirm:boolean;
@@ -68,17 +69,17 @@ export class WizardComponent {
     
     formErrors = {
       'ProductName': '' ,
-      'ProductDescription': '' ,
+      'serviceDescription': '' ,
       'UniversalProductCode': '', 
       'costInformation': '' ,
       'currency': ''
     };
     validationMessages = {
-        'ProductName': {
-            'required': 'ProductName is required.',
+        'serviceName': {
+            'required': 'Service Name is required.',
         }, 
-        'ProductDescription': {
-            'required': 'ProductDescription is required.',
+        'serviceDescription': {
+            'required': 'service Description is required.',
         },
         'UniversalProductCode': {
             'required': 'UniversalProductCode is required.',
@@ -114,17 +115,22 @@ export class WizardComponent {
           });
 
         this.productForm = this.formBuilder.group({
-            'I4GServiceCode': ['', Validators.required],
+            'I4GServiceCode': [''],
             'SKUCode': ['SKU0010', Validators.required],
-            'ProductName': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(100)]],
-            'ProductDescription': ['', [Validators.required,Validators.minLength(20),Validators.maxLength(1000)]],
+            'serviceName': ['', [Validators.required,Validators.minLength(5),Validators.maxLength(100)]],
+            'serviceDescription': ['', [Validators.required,Validators.minLength(20),Validators.maxLength(1000)]],
             'UniversalProductCode': ['', [Validators.minLength(5),Validators.maxLength(50)]],
-            'costInformation': ['', [Validators.required ,Validators.minLength(5),Validators.maxLength(50)]],
+            'costInformation': ['', [Validators.required ,Validators.minLength(5),Validators.maxLength(500)]],
             'currency': ['', [Validators.required]],
             'items': this.formBuilder.array([this.createItem()])
         });
         this.faqform = this.formBuilder.group({
-          'faqname': ['', Validators.required]
+          'faqname': [''],
+          'faqDesc' : [''],
+        });
+        this.specialpromotions = this.formBuilder.group({
+          'specialInformation': [''],
+          'promotionInformation' : [''],
         });
         this.imageUploadForm = this.formBuilder.group({
            'Name': ['', Validators.required],
@@ -670,6 +676,7 @@ export class WizardComponent {
         let productForm = this.productForm;
         let sampleDetail = this.sampleDetail;
         let faqform = this.faqform;
+        let specialspromotions = this.specialpromotions;
         let ProductKeywordsForm = this.ProductKeywordsForm;
         let tradeDetailForm = this.tradeDetailForm;
         let tradeDetailOption = this.tradeDetailOption;
@@ -741,19 +748,32 @@ export class WizardComponent {
                     }
                     if(step.name=='Service Details') {
                       console.log(index);
-                      console.log(productForm.valid);
+                      console.log(productForm);
                         if (productForm.valid) {
-                          step.hasError = true;
-                        } else {
                           step.active = false;
                           step.valid = true;
-                          steps[index+3].active=true;
+                          steps[index+1].active=true;
                           this.createServiceProfile();
                           return true;
+                        } else {
+                          step.hasError = true;
                         }
-                    } if(step.name=='FAQs') {
+                    } 
+                    if(step.name=='FAQs') {
                       console.log(index);
                       if (faqform.valid) {
+                        step.active = false;
+                        step.valid = true;
+                        steps[index+1].active=true;
+                        // this.createServiceProfile();
+                        return true;
+                    } else {
+                        step.hasError = true;
+                    }
+                    }
+                    if(step.name=='Specials and Promotions') {
+                      console.log(index);
+                      if (specialspromotions.valid) {
                         step.active = false;
                         step.valid = true;
                         steps[index+1].active=true;
@@ -769,11 +789,11 @@ export class WizardComponent {
                             step.active = false;
                             step.valid = true;
                             this.saveServiceMedia();
-                            if(this.productForm.value.SampleAvailability == 'Y' && this.productForm.value.SampleFree == 'N'){
+                            // if(this.productForm.value.SampleAvailability == 'Y' && this.productForm.value.SampleFree == 'N'){
                             steps[index+1].active=true;
-                            }else{
-                            steps[index+2].active=true;
-                            }
+                            // }else{
+                            // steps[index+2].active=true;
+                            // }
                             return true;
                           }
                         }
@@ -795,7 +815,7 @@ export class WizardComponent {
                         }                      
                     }
 
-                    if(step.name=='Social Network Info'){
+                    if(step.name=='Social Network Info') {
                         this.saveTradeDetails();
                         //console.log("Trade Detail", tradeDetailOption.IncoTerms.Selected.length ,  tradeDetailOption.PaymentWays.Selected.length , tradeDetailOption.PaymentTerms.Selected.length);
                         if (tradeDetailOption.IncoTerms.Selected.length > 0 && tradeDetailOption.PaymentWays.Selected.length > 0 && tradeDetailOption.PaymentTerms.Selected.length > 0) {
@@ -863,16 +883,26 @@ export class WizardComponent {
                       steps[index-1].active=true;
                       return true;                   
                   }
+                  if(step.name=='FAQs'){
+                    step.active = false;
+                    steps[index-1].active=true;
+                    return true;
+                  }
+                  if(step.name=='Specials and Promotions'){
+                    step.active = false;
+                    steps[index-1].active=true;
+                    return true;
+                }
                   if(step.name=='Media'){
                     step.active = false;
                     steps[index-1].active=true;
                     return true;
                   }
-                  if(step.name=='Sample Detail'){
-                      step.active = false;
-                      steps[index-1].active=true;
-                      return true;                             
-                  }
+                  // if(step.name=='Sample Detail'){
+                  //     step.active = false;
+                  //     steps[index-1].active=true;
+                  //     return true;                             
+                  // }
 
                   if(step.name=='Social Network Info'){
                      step.active = false;
