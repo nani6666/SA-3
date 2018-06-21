@@ -108,8 +108,8 @@ export class WizardComponent {
         ];
          
          this.accountForm = this.formBuilder.group({
-            'I4GProductCode': '',
-            'I4GCompanyCode': ['20171012124501084074', Validators.required],
+            'I4GServiceCode': '',
+            'I4GCompanyCode': ['1234', Validators.required],
             'IndustryCode': ['', Validators.required],
             'SectorCode': ['', Validators.required],
           });
@@ -296,7 +296,7 @@ export class WizardComponent {
     public saveSectorIndustryDetail(){       
          this.sectors.map((item) => { if(item.Code == this.accountForm.value.SectorCode){ this.confirmDetail["SectorCode"] = item.Code }});
          this.industries.map((item) => { if(item.Code == this.accountForm.value.IndustryCode){ this.confirmDetail["IndustryName"] = item.Code }});
-         console.log("this.confirmDetail", this.confirmDetail);
+        //  console.log("this.confirmDetail", this.confirmDetail);
          var obj = {"Service": this.accountForm.value};
          if(typeof this.productId == 'undefined'){
             this.wizardApiService.saveSectorIndustryDetail(obj).subscribe((data) => {
@@ -315,7 +315,7 @@ export class WizardComponent {
             );         
          }else{
            var newobj = {"Service": {"I4GCompanyCode": this.accountForm.value.I4GCompanyCode,"SectorCode": this.accountForm.value.SectorCode,
-                    "IndustryCode": this.accountForm.value.IndustryCode}}
+                    "IndustryName": this.accountForm.value.IndustryCode}}
             this.wizardApiService.saveSectorIndustryDetail(newobj).subscribe((data) => {
                const opt = JSON.parse(JSON.stringify(this.options));
                this.toastrService[this.types[0]]('Sectors & industries Updated successfully', 'Sectors & industries', opt);
@@ -325,11 +325,15 @@ export class WizardComponent {
                this.tradeDetailForm.controls["I4GServiceCode"].setValue(this.productId);
                this.ProductKeywordsForm.controls["I4GServiceCode"].setValue(this.productId);
                this.tradeDetailOption.I4GProductCode = this.productId;
-               this.saveMediaUrl.I4GProductCode = this.productId;
+               this.saveMediaUrl.I4GServiceCode = this.productId;
             },(error) => {
              console.log("error", error);
             }
             );
+    }
+
+     public createCostDetails(): FormGroup {
+            return this.formBuilder.group({
          }
 
        }
@@ -337,12 +341,7 @@ export class WizardComponent {
     public createItem(): FormGroup {
             return this.formBuilder.group({
             "Name": ['', [Validators.required,Validators.pattern('^[+]?[0-9]*[a-z]*[A-Z]*')]],
-            "Value": ['', [Validators.required,Validators.pattern('^[+]?[0-9]*')]]
-            });
-    }
-
-     public createCostDetails(): FormGroup {
-            return this.formBuilder.group({
+            "Value": ['', [Validators.required,Validators.pattern('^[+]?[0-9]*')]],
             "Cost": ['', [Validators.required,Validators.pattern('^[+]?[0-9]+')]],
             "Quantity": ['', [Validators.required,Validators.pattern('^[+]?[0-9]+')]],
             "Unit": ['', Validators.required],
