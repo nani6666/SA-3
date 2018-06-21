@@ -230,8 +230,8 @@ export class WizardComponent {
     }
        
     public updateMediaUrls(){
-      this.saveMediaUrl.ProductMedia.VideoUrls.Video 
-                 = this.saveMediaUrl.ProductMedia.VideoUrls.Video.concat(this.videoUrlsForm.value.VideoUrls);
+      this.saveMediaUrl.ServiceMedia.VideoUrls.Video 
+                 = this.saveMediaUrl.ServiceMedia.VideoUrls.Video.concat(this.videoUrlsForm.value.VideoUrls);
       console.log(this.saveMediaUrl);
       const opt = JSON.parse(JSON.stringify(this.options));
       this.toastrService[this.types[0]]('Service Url Added successfully', 'Service Url', opt);
@@ -635,7 +635,7 @@ export class WizardComponent {
               const opt = JSON.parse(JSON.stringify(this.options));
               this.toastrService[this.types[0]]('Service Image Uploaded successfully', 'Service Image', opt);
             console.log('success', data)  
-            this.saveMediaUrl.ProductMedia.ImageUrls.Image.push({Name: this.imageUploadForm.value.Name, Url: data.message});
+            this.saveMediaUrl.ServiceMedia.ImageUrls.Image.push({Name: this.imageUploadForm.value.Name, Url: data.message});
             console.log('s', this.saveMediaUrl);
             this.imageUploadForm.reset();
             this.imagename = '.';
@@ -678,13 +678,13 @@ export class WizardComponent {
      
 
     public removeImageUrlToList(i){
-      this.saveMediaUrl.ProductMedia.ImageUrls.Image.splice(i, 1);
+      this.saveMediaUrl.ServiceMedia.ImageUrls.Image.splice(i, 1);
       const opt = JSON.parse(JSON.stringify(this.options));
       this.toastrService[this.types[0]]('Product Image Deleted successfully', 'Product Image', opt);
     }
 
     public removeVideoUrlToList(i){
-      this.saveMediaUrl.ProductMedia.VideoUrls.Video.splice(i, 1);
+      this.saveMediaUrl.ServiceMedia.VideoUrls.Video.splice(i, 1);
       const opt = JSON.parse(JSON.stringify(this.options));
       this.toastrService[this.types[0]]('Product Url Deleted successfully', 'Product Url', opt);
     }
@@ -803,7 +803,7 @@ export class WizardComponent {
                     }
                     }
                     if(step.name=='Media') {
-                        if (saveMediaUrl.ProductMedia.ImageUrls.Image.length > 0 && saveMediaUrl.ProductMedia.VideoUrls.Video.length > 0) {
+                        if (saveMediaUrl.ServiceMedia.ImageUrls.Image.length > 0 && saveMediaUrl.ServiceMedia.VideoUrls.Video.length > 0) {
                           if ((this.videoUrlsForm.value.VideoUrls[0].Name === '' && this.videoUrlsForm.value.VideoUrls[0].Url === '') || (this.videoUrlsForm.value.VideoUrls[0].Name != '' && this.videoUrlsForm.value.VideoUrls[0].Url != '')) {
                             step.active = false;
                             step.valid = true;
