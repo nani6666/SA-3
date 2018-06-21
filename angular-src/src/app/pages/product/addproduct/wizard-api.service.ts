@@ -73,6 +73,12 @@ export class WizardApiService {
     .map(res => res.json());
     }
 
+    savespecialPromotions(data){
+      this.loadToken();
+      return this.http.post(globalVariable.url+'listing/saveSpecialsAndPromotions', data, {headers: this.headerDetail})
+      .map(res => res.json());
+      }
+
     saveSampleDetail(data){
     this.loadToken();
     return this.http.post(globalVariable.url+'listing/saveSampleDetail', data, {headers: this.headerDetail})
@@ -103,10 +109,10 @@ export class WizardApiService {
     .map(res => res.json());
     }
 
-    uploadProductImage(formData){
+    uploadServiceImage(formData){
     this.imgloadToken();
     let options = new RequestOptions({ headers: this.headerDetail });
-    return this.http.post(globalVariable.url+'listing/uploadProductImage', formData, options)
+    return this.http.post(globalVariable.url+'listing/uploadServiceImage', formData, options)
     .map(res => res.json());
     }
 

@@ -206,7 +206,7 @@
                   <az-image-uploader [image]="imagename" (valueChange)="imageChange($event)"></az-image-uploader>
                </div>
                <div class="col-sm-6 offset-sm-3 text-center">
-                  <form [formGroup]="imageUploadForm" (ngSubmit)="uploadProductImage()">
+                  <form [formGroup]="imageUploadForm" (ngSubmit)="uploadServiceImage()">
                      <div class="form-group" [ngClass]="{'has-danger' :  imageUploadForm.get('Name').hasError('required'), 'has-success' : !imageUploadForm.get('Name').hasError('required') }" *ngIf="!imageUploadForm.get('Image').hasError('required')">
                         <input type="text" formControlName="Name" class="form-control" id="image1" aria-describedby="ImageName" placeholder="Name">
                   </div>

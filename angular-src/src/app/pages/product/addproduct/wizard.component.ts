@@ -59,8 +59,8 @@ export class WizardComponent {
                                      "PaymentWays": {"Selected": []},
                                      "PaymentTerms": { "Selected": []}
                                     };
-    public saveMediaUrl :any =  { "I4GProductCode":"",
-                                  "ProductMedia":{ 
+    public saveMediaUrl :any =  { "I4GServiceCode":"",
+                                  "ServiceMedia":{ 
                                   "ImageUrls": { "Image": [] },
                                   "VideoUrls": { "Video": [] }
                                   }
@@ -125,12 +125,12 @@ export class WizardComponent {
             'items': this.formBuilder.array([this.createItem()])
         });
         this.faqform = this.formBuilder.group({
-          'faqname': [''],
-          'faqDesc' : [''],
+          'faqname': ['',  [Validators.minLength(5),Validators.maxLength(500)]],
+          'faqDesc' : ['', [Validators.minLength(5),Validators.maxLength(500)]],
         });
         this.specialpromotions = this.formBuilder.group({
-          'specialInformation': [''],
-          'promotionInformation' : [''],
+          'specialInformation': ['' ,[Validators.minLength(5),Validators.maxLength(500)]],
+          'promotionInformation' : ['' , [Validators.minLength(5),Validators.maxLength(500)]],
         });
         this.imageUploadForm = this.formBuilder.group({
            'Name': ['', Validators.required],
@@ -230,10 +230,11 @@ export class WizardComponent {
     }
        
     public updateMediaUrls(){
-      this.saveMediaUrl.ProductMedia.VideoUrls.Video = this.saveMediaUrl.ProductMedia.VideoUrls.Video.concat(this.videoUrlsForm.value.VideoUrls);
+      this.saveMediaUrl.ProductMedia.VideoUrls.Video 
+                 = this.saveMediaUrl.ProductMedia.VideoUrls.Video.concat(this.videoUrlsForm.value.VideoUrls);
       console.log(this.saveMediaUrl);
       const opt = JSON.parse(JSON.stringify(this.options));
-      this.toastrService[this.types[0]]('Product Url Added successfully', 'Product Url', opt);
+      this.toastrService[this.types[0]]('Service Url Added successfully', 'Service Url', opt);
       this.videoUrlsForm.reset();
     }
 
@@ -502,15 +503,15 @@ export class WizardComponent {
     }
 
    public createServiceProfile(){
-       var objspec = {"ProductSpecs" : {"Spec" : this.productForm.value.items}};
-       this.productForm.value["ProductSpecs"] = objspec.ProductSpecs;
-       var productFormData = {"Product" : JSON.parse(JSON.stringify(this.productForm.value))};
-       delete productFormData.Product.items;
-       for(var item in productFormData.Product){this.confirmDetail[item] = productFormData.Product[item]}
-       delete productFormData.Product.SampleFree;
+       var objspec = {"Features" : {"Feature" : this.productForm.value.items}};
+       this.productForm.value["Features"] = objspec.Features;
+       var productFormData = {"Service" : JSON.parse(JSON.stringify(this.productForm.value))};
+       delete productFormData.Service.items;
+       for(var item in productFormData.Service){this.confirmDetail[item] = productFormData.Service[item]}
+       delete productFormData.Service.SampleFree;
        this.wizardApiService.createServiceProfile(productFormData).subscribe((data) => {
          const opt = JSON.parse(JSON.stringify(this.options));
-         this.toastrService[this.types[0]]('Service Details Added successfully', 'Product Details', opt);
+         this.toastrService[this.types[0]]('Service Details Added successfully', 'Service Details', opt);
         console.log("Status data", data)
         // this.saveProductProfile();
        },(error)=> {
@@ -518,6 +519,23 @@ export class WizardComponent {
        });
      }
 
+     public savespecialsPromotions() {
+       const obj = {
+        "Service": {
+          "I4GServiceCode":this.productId,
+           "Specials":this.specialpromotions.value.specialInformation,
+           "Promotions": this.specialpromotions.value.promotionInformation
+        }
+      }
+      this.wizardApiService.savespecialPromotions(obj).subscribe((data) => {
+        const opt = JSON.parse(JSON.stringify(this.options));
+        console.log("Status data", data)
+        this.toastrService[this.types[0]]('Specials & Promotions Added successfully', 'Specials & Promotions', opt);
+       // this.saveProductProfile();
+      },(error)=> {
+       console.log("Status error", error)
+      });
+     }
   /* public saveProductProfile(){
     var obj = {"Product": this.productForm.value};
     this.wizardApiService.saveProductProfile(obj).subscribe((data) => {
@@ -540,31 +558,31 @@ export class WizardComponent {
    public imageChange(file){
         console.log("file event", file);
         this.file = file;
-        this.imageUploadForm.controls["Name"].setValue("");
-        this.imageUploadForm.controls["Image"].setValue(this.file.name);
+        this.imageUploadForm.controls['Name'].setValue('');
+        this.imageUploadForm.controls['Image'].setValue(this.file.name);
         }
    
 
    public paymentType(parm){
           this.paytype = parm;
-          this.sampleDetail.controls["SamplePaymentWaysJson"].setValue(this.paytype);
+          this.sampleDetail.controls['SamplePaymentWaysJson'].setValue(this.paytype);
           }
 
 
    public saveSampleDetail(){
      for(var item in this.sampleDetail.value){this.confirmDetail[item] = this.sampleDetail.value[item]};
-     this.UnitS.map((map) => {if(map.UnitSid == this.sampleDetail.value.SampleUnit){this.confirmDetail["SampleUnit"] = map.UnitName}});
-     console.log("this.confirmDetail", this.confirmDetail);
-     var obj = {"Product": this.sampleDetail.value};
+     this.UnitS.map((map) => {if(map.UnitSid == this.sampleDetail.value.SampleUnit){this.confirmDetail['SampleUnit'] = map.UnitName}});
+     console.log('this.confirmDetail', this.confirmDetail);
+     var obj = {'Product': this.sampleDetail.value};
      console.log(obj);
      this.wizardApiService.saveSampleDetail(obj).subscribe((data) => {
-     console.log("saveSampleDetail", data);
-     var getSampleDetailParam = {"Product" : {"I4GProductCode": this.productId}};
+     console.log('saveSampleDetail', data);
+     var getSampleDetailParam = {'Product' : {'I4GProductCode': this.productId}};
      this.wizardApiService.getSampleDetail(getSampleDetailParam).subscribe((respData) => {
       const opt = JSON.parse(JSON.stringify(this.options));
       this.toastrService[this.types[0]]('Sample Details Added successfully', 'Sample Details', opt);
-     console.log("getSampleDetail", respData);
-     this.confirmDetail["SampleCostValidity"] = respData.Product.Lastmodified;
+     console.log('getSampleDetail', respData);
+     this.confirmDetail['SampleCostValidity'] = respData.Product.Lastmodified;
      });
      });
    }       
@@ -595,30 +613,30 @@ export class WizardComponent {
    } 
 
    public saveProductKeywords(){
-     this.ProductKeywordsForm.value["Words"] = {"Word": this.ProductKeywordsForm.value.Word};
+     this.ProductKeywordsForm.value['Words'] = {'Word': this.ProductKeywordsForm.value.Word};
      var obj = {ProductKeywords : this.ProductKeywordsForm.value};
      delete obj.ProductKeywords.Word;
      for(var item in this.ProductKeywordsForm.value){this.confirmDetail[item] = this.ProductKeywordsForm.value[item]};
-     console.log("jkjk", this.confirmDetail);
+     console.log('jkjk', this.confirmDetail);
      this.wizardApiService.saveProductKeywords(obj).subscribe((data) => {
         const opt = JSON.parse(JSON.stringify(this.options));
         this.toastrService[this.types[0]]('Sample Product Keywords Added successfully', 'Sample Product Keywords', opt);
-      console.log("words", data);
+      console.log('words', data);
       })
    }    
    
-    public uploadProductImage(){
+    public uploadServiceImage(){
       if(this.file){
         let formData:FormData = new FormData();
         formData.append('file', this.file, this.file.name);
-        formData.append("i4gProductCode", this.productId);
-            this.wizardApiService.uploadProductImage(formData).subscribe(
+        formData.append('i4gServiceCode', this.productId);
+            this.wizardApiService.uploadServiceImage(formData).subscribe(
             (data) => {
               const opt = JSON.parse(JSON.stringify(this.options));
-              this.toastrService[this.types[0]]('Product Image Uploaded successfully', 'Product Image', opt);
+              this.toastrService[this.types[0]]('Service Image Uploaded successfully', 'Service Image', opt);
             console.log('success', data)  
             this.saveMediaUrl.ProductMedia.ImageUrls.Image.push({Name: this.imageUploadForm.value.Name, Url: data.message});
-            console.log("s", this.saveMediaUrl);
+            console.log('s', this.saveMediaUrl);
             this.imageUploadForm.reset();
             this.imagename = '.';
             setTimeout(() => {
@@ -635,9 +653,9 @@ export class WizardComponent {
             var termname = this.tradeDetailForm.value.TermName;
             let formData:FormData = new FormData();
             formData.append('file', this.file1, this.file1.name);
-            formData.append("i4gProductCode", this.productId);
-            formData.append("docType", 'doc');
-            formData.append("incoTerm", this.tradeDetailForm.value.TermName);
+            formData.append('i4gProductCode', this.productId);
+            formData.append('docType', 'doc');
+            formData.append('incoTerm', this.tradeDetailForm.value.TermName);
             this.wizardApiService.uploadTermsDocForIncoTerm(formData).subscribe((data) => {
               console.log('Document File Uploaded', data)  
               //this.saveIncoTermCostDetailAdd();
@@ -652,9 +670,9 @@ export class WizardComponent {
        this.wizardApiService.saveServiceMedia(this.saveMediaUrl).subscribe((data) => {
          const opt = JSON.parse(JSON.stringify(this.options));
          this.toastrService[this.types[0]]('Media Added successfully', 'Media', opt);
-         console.log("data", data);
+         console.log('data', data);
          },(error) => {
-         console.log("error", error);  
+         console.log('error', error);  
          });
       }
      
@@ -773,11 +791,12 @@ export class WizardComponent {
                     }
                     if(step.name=='Specials and Promotions') {
                       console.log(index);
+                      console.log(this.specialpromotions);
                       if (specialspromotions.valid) {
                         step.active = false;
                         step.valid = true;
                         steps[index+1].active=true;
-                        // this.createServiceProfile();
+                        this.savespecialsPromotions();
                         return true;
                     } else {
                         step.hasError = true;
@@ -785,7 +804,7 @@ export class WizardComponent {
                     }
                     if(step.name=='Media') {
                         if (saveMediaUrl.ProductMedia.ImageUrls.Image.length > 0 && saveMediaUrl.ProductMedia.VideoUrls.Video.length > 0) {
-                          if ((this.videoUrlsForm.value.VideoUrls[0].Name === "" && this.videoUrlsForm.value.VideoUrls[0].Url === "") || (this.videoUrlsForm.value.VideoUrls[0].Name != "" && this.videoUrlsForm.value.VideoUrls[0].Url != "")) {
+                          if ((this.videoUrlsForm.value.VideoUrls[0].Name === '' && this.videoUrlsForm.value.VideoUrls[0].Url === '') || (this.videoUrlsForm.value.VideoUrls[0].Name != '' && this.videoUrlsForm.value.VideoUrls[0].Url != '')) {
                             step.active = false;
                             step.valid = true;
                             this.saveServiceMedia();
@@ -796,24 +815,23 @@ export class WizardComponent {
                             // }
                             return true;
                           }
-                        }
-                        /*else{
+                        } else {
                             step.hasError = true;
-                        }*/
+                        }
                     }
 
-                    if(step.name=='Sample Detail'){
-                        if (sampleDetail.valid) {
-                            step.active = false;
-                            step.valid = true;
-                            steps[index+1].active=true;
-                            this.saveSampleDetail();
-                            return true;
-                        }
-                        else{
-                            step.hasError = true;
-                        }                      
-                    }
+                    // if(step.name=='Sample Detail'){
+                    //     if (sampleDetail.valid) {
+                    //         step.active = false;
+                    //         step.valid = true;
+                    //         steps[index+1].active=true;
+                    //         this.saveSampleDetail();
+                    //         return true;
+                    //     }
+                    //     else{
+                    //         step.hasError = true;
+                    //     }                      
+                    // }
 
                     if(step.name=='Social Network Info') {
                         this.saveTradeDetails();
