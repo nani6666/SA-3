@@ -150,7 +150,7 @@ export class WizardComponent {
         });
         
         this.ProductKeywordsForm = this.formBuilder.group({
-           'I4GProductCode': ['', Validators.required],
+           'I4GServiceCode': ['', Validators.required],
            'Word': ['', Validators.required]
         });
 
@@ -331,10 +331,10 @@ export class WizardComponent {
             }
             );
     }
-
+  }
      public createCostDetails(): FormGroup {
             return this.formBuilder.group({
-         }
+         });
 
        }
 
